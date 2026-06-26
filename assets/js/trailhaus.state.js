@@ -35,6 +35,7 @@
   };
 
   function deepClone(value) {
+    if (value === undefined) return undefined;
     return JSON.parse(JSON.stringify(value));
   }
 
@@ -59,7 +60,11 @@
       const segments = path.split('.');
       let target = state;
       for (let i = 0; i < segments.length - 1; i += 1) {
-        target = target[segments[i]];
+        const segment = segments[i];
+        if (target[segment] === undefined || target[segment] === null) {
+          target[segment] = {};
+        }
+        target = target[segment];
       }
       const key = segments[segments.length - 1];
       const prev = deepClone(target[key]);

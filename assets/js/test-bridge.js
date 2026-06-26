@@ -23,6 +23,7 @@
   }
 
   function waitForStable(timeoutMs) {
+    var limit = typeof timeoutMs === 'number' ? timeoutMs : 5000;
     return new Promise(function (resolve) {
       var elapsed = 0;
       var interval = 50;
@@ -34,7 +35,7 @@
           resolve(getState());
           return;
         }
-        if (elapsed >= timeoutMs) {
+        if (elapsed >= limit) {
           clearInterval(timer);
           resolve(null);
         }

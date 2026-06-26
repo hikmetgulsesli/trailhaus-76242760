@@ -170,7 +170,7 @@
       onClick: function () {
         // Minimal create flow: append a placeholder item so persistence is exercised.
         state.update('items', function (items) {
-          var next = items.slice();
+          var next = (items || []).slice();
           next.push({
             id: 'item-' + Date.now(),
             name: 'New Gear Item',
@@ -503,7 +503,8 @@
           title: 'Notifications',
           onClick: function () {
             state.update('preferences', function (prefs) {
-              return Object.assign({}, prefs, { notificationsEnabled: !prefs.notificationsEnabled });
+              var currentPrefs = prefs || {};
+              return Object.assign({}, currentPrefs, { notificationsEnabled: !currentPrefs.notificationsEnabled });
             });
           }
         }, [iconSvg('notifications')]),
@@ -596,7 +597,12 @@
       bootstrap();
     } else {
       fetch(seedUrl)
-        .then(function (res) { return res.json(); })
+        .then(function (res) {
+          if (!res.ok) {
+            throw new Error('Failed to fetch seed data: ' + res.statusText);
+          }
+          return res.json();
+        })
         .then(function (data) {
           state.replace(data);
           storage.save(state.getSnapshot());
