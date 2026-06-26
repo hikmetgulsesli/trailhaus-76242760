@@ -11,6 +11,154 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      .operations-layout {
+        display: grid;
+        grid-template-columns: 1fr 20rem;
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .operations-main {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        min-width: 0;
+      }
+      .preview-panel {
+        position: sticky;
+        top: 1.5rem;
+        background: var(--color-surface, #f8f9fd);
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-lg, 0.25rem);
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 7rem);
+        overflow: hidden;
+      }
+      .preview-image {
+        height: 10rem;
+        background: var(--color-surface-container-lowest, #ffffff);
+        border-bottom: 1px solid var(--color-outline-variant, #c3c8c1);
+        display: grid;
+        place-items: center;
+        color: var(--color-on-surface-variant, #434843);
+        font-size: 3rem;
+      }
+      .preview-body {
+        padding: 1.25rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+      }
+      .preview-title {
+        margin: 0 0 0.25rem 0;
+        font-family: var(--font-headline-md, "Archivo Narrow"), sans-serif;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        font-weight: 700;
+        color: var(--color-primary, #061b0e);
+      }
+      .preview-sku {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.75rem;
+        color: var(--color-on-surface-variant, #434843);
+        margin-bottom: 1rem;
+      }
+      .preview-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem 1rem;
+        margin-bottom: 1.25rem;
+      }
+      .preview-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .preview-meta-label {
+        font-family: var(--font-label-sm, Inter), sans-serif;
+        font-size: 0.625rem;
+        line-height: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .preview-meta-value {
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-on-surface, #191c1f);
+      }
+      .preview-meta-value.accent {
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-primary, #061b0e);
+      }
+      .preview-specs {
+        border-top: 1px solid var(--color-outline-variant, #c3c8c1);
+        padding-top: 1rem;
+        margin-bottom: 1.25rem;
+      }
+      .preview-specs-title {
+        font-family: var(--font-label-sm, Inter), sans-serif;
+        font-size: 0.625rem;
+        line-height: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--color-on-surface-variant, #434843);
+        margin: 0 0 0.75rem 0;
+      }
+      .preview-specs-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      .preview-specs-list li {
+        display: flex;
+        justify-content: space-between;
+      }
+      .preview-specs-list span:first-child {
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .preview-actions {
+        margin-top: auto;
+        display: flex;
+        gap: 0.75rem;
+      }
+      .preview-actions .btn {
+        flex: 1;
+      }
+      .item-row {
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .item-row:hover {
+        background: var(--color-surface-container-low, #f2f4f7);
+      }
+      .item-row.selected {
+        background: var(--color-primary-fixed, #d0e9d4);
+        border-color: var(--color-primary-fixed-dim, #819986);
+      }
+      @media (max-width: 1024px) {
+        .operations-layout {
+          grid-template-columns: 1fr;
+        }
+        .preview-panel {
+          position: static;
+          height: auto;
+        }
+      }
+    </style>
   </head>
   <body>
     <main data-setfarm-root="baseline" data-testid="setfarm-app-root" class="app-shell"></main>
@@ -89,6 +237,17 @@
           var cats = {};
           items.forEach(function (item) { cats[item.category] = true; });
           return ['All Items'].concat(Object.keys(cats).sort());
+        }
+
+        function getPreviewItem() {
+          var items = filteredItems();
+          var previewId = state.get('ui.previewItemId');
+          var found = items.find(function (i) { return i.id === previewId; });
+          return found || items[0] || null;
+        }
+
+        function setPreviewItem(itemId) {
+          state.set('ui.previewItemId', itemId);
         }
 
         function setStorageStatusUI(message, type) {
@@ -181,6 +340,7 @@
 
         function renderTable() {
           var items = filteredItems();
+          var previewItem = getPreviewItem();
           var header = el('div', { className: 'item-row item-header' }, [
             el('span', null, [el('input', { type: 'checkbox', disabled: true })]),
             el('span', { textContent: 'Name' }),
@@ -194,7 +354,15 @@
 
           var rows = items.map(function (item) {
             var statusClass = 'status-' + item.status.toLowerCase();
-            return el('div', { className: 'item-row' }, [
+            var isSelected = previewItem && previewItem.id === item.id;
+            return el('div', {
+              className: 'item-row' + (isSelected ? ' selected' : ''),
+              'data-record-id': item.id,
+              onClick: function (e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+                setPreviewItem(item.id);
+              }
+            }, [
               el('span', null, [el('input', { type: 'checkbox', 'data-testid': 'select-' + item.id })]),
               el('span', { textContent: item.name }),
               el('span', { className: 'sku', textContent: item.sku }),
@@ -227,15 +395,91 @@
           ]);
         }
 
+        function renderPreviewPanel() {
+          var item = getPreviewItem();
+          if (!item) {
+            return el('aside', { className: 'preview-panel', 'data-testid': 'preview-panel' }, [
+              el('div', { className: 'preview-body' }, [
+                el('p', { className: 'empty-state', textContent: 'Select an item to preview details.' })
+              ])
+            ]);
+          }
+
+          var conditionByStatus = {
+            'Available': 'Excellent',
+            'Rented': 'Good',
+            'Maintenance': 'Fair'
+          };
+          var condition = item.condition || conditionByStatus[item.status] || 'Good';
+          var replacementValue = typeof item.replacementValue === 'number'
+            ? item.replacementValue
+            : Math.round((item.dailyPrice || 0) * 10);
+
+          return el('aside', { className: 'preview-panel', 'data-testid': 'preview-panel' }, [
+            el('div', { className: 'preview-image' }, [iconSvg('inventory_2')]),
+            el('div', { className: 'preview-body' }, [
+              el('h3', { className: 'preview-title', textContent: item.name }),
+              el('p', { className: 'preview-sku', textContent: item.sku }),
+              el('div', { className: 'preview-meta' }, [
+                el('div', { className: 'preview-meta-item' }, [
+                  el('span', { className: 'preview-meta-label', textContent: 'Category' }),
+                  el('span', { className: 'preview-meta-value', textContent: item.category })
+                ]),
+                el('div', { className: 'preview-meta-item' }, [
+                  el('span', { className: 'preview-meta-label', textContent: 'Condition' }),
+                  el('span', { className: 'preview-meta-value', textContent: condition })
+                ]),
+                el('div', { className: 'preview-meta-item' }, [
+                  el('span', { className: 'preview-meta-label', textContent: 'Daily Rate' }),
+                  el('span', { className: 'preview-meta-value accent', textContent: '$' + item.dailyPrice })
+                ]),
+                el('div', { className: 'preview-meta-item' }, [
+                  el('span', { className: 'preview-meta-label', textContent: 'Replacement Value' }),
+                  el('span', { className: 'preview-meta-value', textContent: '$' + replacementValue })
+                ])
+              ]),
+              el('div', { className: 'preview-specs' }, [
+                el('h4', { className: 'preview-specs-title', textContent: 'Technical Specs' }),
+                el('ul', { className: 'preview-specs-list' }, [
+                  el('li', null, [el('span', { textContent: 'Stock:' }), el('span', { textContent: item.stock + ' units' })]),
+                  el('li', null, [el('span', { textContent: 'Status:' }), el('span', { textContent: item.status })])
+                ])
+              ]),
+              el('div', { className: 'preview-actions' }, [
+                el('button', {
+                  className: 'btn btn-secondary',
+                  textContent: 'Edit',
+                  'data-action-id': 'ACT_SELECT_RECORD',
+                  'data-record-id': item.id,
+                  onClick: function () {
+                    window.TrailHausActions.ACT_SELECT_RECORD.openEditor(item.id);
+                  }
+                }),
+                el('button', {
+                  className: 'btn btn-secondary',
+                  textContent: 'Refresh',
+                  'data-action-id': 'ACT_RETRY_LOAD',
+                  onClick: function () {
+                    window.TrailHausActions.ACT_RETRY_LOAD.retryLoad().then(function () { render(); });
+                  }
+                })
+              ])
+            ])
+          ]);
+        }
+
         function renderInventory() {
           if (state.get('storageStatus') === 'error' && (state.get('items') || []).length === 0) {
             return renderErrorState();
           }
-          return el('div', { className: 'view view-inventory' }, [
-            renderMetrics(),
-            renderFilters(),
-            renderTable(),
-            renderPagination()
+          return el('div', { className: 'operations-layout' }, [
+            el('div', { className: 'operations-main' }, [
+              renderMetrics(),
+              renderFilters(),
+              renderTable(),
+              renderPagination()
+            ]),
+            renderPreviewPanel()
           ]);
         }
 
@@ -343,6 +587,7 @@
         function init() {
           state.set('currentView', VIEWS.INVENTORY);
           state.set('activePanel', 'inventory');
+          state.set('ui.previewItemId', null);
           var saved = storage.load();
           if (saved.ok && saved.state && saved.state.items && saved.state.items.length) {
             state.replace(saved.state);
@@ -369,7 +614,8 @@
           storage: storage,
           render: render,
           getMetrics: getMetrics,
-          filteredItems: filteredItems
+          filteredItems: filteredItems,
+          getPreviewItem: getPreviewItem
         };
 
         if (document.readyState === 'loading') {
