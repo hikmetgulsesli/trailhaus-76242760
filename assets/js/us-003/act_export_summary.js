@@ -66,14 +66,18 @@
   }
 
   function toCsv(summary) {
+    // Escape a single CSV cell per RFC 4180: quote values that contain
+    // commas, double quotes, or line breaks, and escape quotes by doubling.
     function escapeCell(val) {
       var str = val === null || val === undefined ? '' : String(val);
-      if (/[",\n\r]/.test(str)) {
+      if (str.indexOf(',') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1 || str.indexOf('\r') !== -1) {
         return '"' + str.replace(/"/g, '""') + '"';
       }
       return str;
     }
 
+    // Apply escaping to every cell in a row so headers, metrics, and item
+    // fields (including topCategory, category, sku, etc.) are CSV-safe.
     function row(cells) {
       return cells.map(escapeCell).join(',');
     }
