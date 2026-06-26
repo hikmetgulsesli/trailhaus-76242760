@@ -1,0 +1,997 @@
+[
+  {
+    "screenId": "2ec34fad2a03488d83583de6f30600c3",
+    "screenTitle": "Settings and Preferences - TrailHaus",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Inventory",
+        "href": "#",
+        "line": 134
+      },
+      {
+        "type": "link",
+        "label": "Bookings",
+        "href": "#",
+        "line": 140
+      },
+      {
+        "type": "link",
+        "label": "Customers",
+        "href": "#",
+        "line": 146
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 152
+      },
+      {
+        "type": "link",
+        "label": "Maintenance",
+        "href": "#",
+        "line": 158
+      },
+      {
+        "type": "link",
+        "label": "Support",
+        "href": "#",
+        "line": 165
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 169
+      },
+      {
+        "type": "button",
+        "label": "Quick Rental",
+        "line": 129
+      },
+      {
+        "type": "button",
+        "label": "Gear",
+        "line": 187
+      },
+      {
+        "type": "button",
+        "label": "Notifications",
+        "line": 190
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 194
+      },
+      {
+        "type": "button",
+        "label": "settings",
+        "line": 197
+      },
+      {
+        "type": "button",
+        "label": "Grid",
+        "line": 228
+      },
+      {
+        "type": "button",
+        "label": "Table",
+        "line": 231
+      },
+      {
+        "type": "button",
+        "label": "Balanced",
+        "line": 243
+      },
+      {
+        "type": "button",
+        "label": "Compact",
+        "line": 246
+      },
+      {
+        "type": "button",
+        "label": "Manage All",
+        "line": 260
+      },
+      {
+        "type": "input",
+        "label": "Search...",
+        "inputType": "text",
+        "placeholder": "Search...",
+        "line": 182
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 297
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Inventory",
+        "href": "#",
+        "line": 134
+      },
+      {
+        "type": "link",
+        "label": "Bookings",
+        "href": "#",
+        "line": 140
+      },
+      {
+        "type": "link",
+        "label": "Customers",
+        "href": "#",
+        "line": 146
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 152
+      },
+      {
+        "type": "link",
+        "label": "Maintenance",
+        "href": "#",
+        "line": 158
+      },
+      {
+        "type": "link",
+        "label": "Support",
+        "href": "#",
+        "line": 165
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 169
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Quick Rental",
+        "line": 129
+      },
+      {
+        "type": "button",
+        "label": "Gear",
+        "line": 187
+      },
+      {
+        "type": "button",
+        "label": "Notifications",
+        "line": 190
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 194
+      },
+      {
+        "type": "button",
+        "label": "settings",
+        "line": 197
+      },
+      {
+        "type": "button",
+        "label": "Grid",
+        "line": 228
+      },
+      {
+        "type": "button",
+        "label": "Table",
+        "line": 231
+      },
+      {
+        "type": "button",
+        "label": "Balanced",
+        "line": 243
+      },
+      {
+        "type": "button",
+        "label": "Compact",
+        "line": 246
+      },
+      {
+        "type": "button",
+        "label": "Manage All",
+        "line": 260
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Search...",
+        "inputType": "text",
+        "placeholder": "Search...",
+        "line": 182
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 297
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 19,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "5c341a4f87b34531b346ff0c5abd3c7c",
+    "screenTitle": "Insights - TrailHaus",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Inventory",
+        "href": "#",
+        "line": 212
+      },
+      {
+        "type": "link",
+        "label": "Bookings",
+        "href": "#",
+        "line": 216
+      },
+      {
+        "type": "link",
+        "label": "Customers",
+        "href": "#",
+        "line": 220
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 224
+      },
+      {
+        "type": "link",
+        "label": "Maintenance",
+        "href": "#",
+        "line": 228
+      },
+      {
+        "type": "link",
+        "label": "Support",
+        "href": "#",
+        "line": 234
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 238
+      },
+      {
+        "type": "link",
+        "label": "System Status: Operational",
+        "href": "#",
+        "line": 448
+      },
+      {
+        "type": "link",
+        "label": "Help Center",
+        "href": "#",
+        "line": 449
+      },
+      {
+        "type": "link",
+        "label": "Privacy Policy",
+        "href": "#",
+        "line": 450
+      },
+      {
+        "type": "button",
+        "label": "Quick Rental",
+        "line": 207
+      },
+      {
+        "type": "button",
+        "label": "Add Gear",
+        "line": 255
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 259
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 263
+      },
+      {
+        "type": "button",
+        "label": "settings",
+        "line": 266
+      },
+      {
+        "type": "button",
+        "label": "Filter",
+        "line": 279
+      },
+      {
+        "type": "button",
+        "label": "Export Summary",
+        "line": 283
+      },
+      {
+        "type": "button",
+        "label": "Review Items",
+        "line": 296
+      },
+      {
+        "type": "button",
+        "label": "View All",
+        "line": 364
+      },
+      {
+        "type": "input",
+        "label": "Search insights...",
+        "inputType": "text",
+        "placeholder": "Search insights...",
+        "line": 251
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Inventory",
+        "href": "#",
+        "line": 212
+      },
+      {
+        "type": "link",
+        "label": "Bookings",
+        "href": "#",
+        "line": 216
+      },
+      {
+        "type": "link",
+        "label": "Customers",
+        "href": "#",
+        "line": 220
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 224
+      },
+      {
+        "type": "link",
+        "label": "Maintenance",
+        "href": "#",
+        "line": 228
+      },
+      {
+        "type": "link",
+        "label": "Support",
+        "href": "#",
+        "line": 234
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 238
+      },
+      {
+        "type": "link",
+        "label": "System Status: Operational",
+        "href": "#",
+        "line": 448
+      },
+      {
+        "type": "link",
+        "label": "Help Center",
+        "href": "#",
+        "line": 449
+      },
+      {
+        "type": "link",
+        "label": "Privacy Policy",
+        "href": "#",
+        "line": 450
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Quick Rental",
+        "line": 207
+      },
+      {
+        "type": "button",
+        "label": "Add Gear",
+        "line": 255
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 259
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 263
+      },
+      {
+        "type": "button",
+        "label": "settings",
+        "line": 266
+      },
+      {
+        "type": "button",
+        "label": "Filter",
+        "line": 279
+      },
+      {
+        "type": "button",
+        "label": "Export Summary",
+        "line": 283
+      },
+      {
+        "type": "button",
+        "label": "Review Items",
+        "line": 296
+      },
+      {
+        "type": "button",
+        "label": "View All",
+        "line": 364
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Search insights...",
+        "inputType": "text",
+        "placeholder": "Search insights...",
+        "line": 251
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 20,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "6ce838b6d4c84ecb982e1a9657489e3a",
+    "screenTitle": "Item Operations - TrailHaus",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Inventory",
+        "href": "#",
+        "line": 246
+      },
+      {
+        "type": "link",
+        "label": "Bookings",
+        "href": "#",
+        "line": 252
+      },
+      {
+        "type": "link",
+        "label": "Customers",
+        "href": "#",
+        "line": 258
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 264
+      },
+      {
+        "type": "link",
+        "label": "Maintenance",
+        "href": "#",
+        "line": 270
+      },
+      {
+        "type": "link",
+        "label": "Support",
+        "href": "#",
+        "line": 280
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 286
+      },
+      {
+        "type": "link",
+        "label": "System Status: Operational",
+        "href": "#",
+        "line": 530
+      },
+      {
+        "type": "link",
+        "label": "Help Center",
+        "href": "#",
+        "line": 531
+      },
+      {
+        "type": "link",
+        "label": "Privacy Policy",
+        "href": "#",
+        "line": 532
+      },
+      {
+        "type": "button",
+        "label": "Add Gear",
+        "line": 218
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 219
+      },
+      {
+        "type": "button",
+        "label": "Quick Rental",
+        "line": 239
+      },
+      {
+        "type": "button",
+        "label": "All Items",
+        "line": 334
+      },
+      {
+        "type": "button",
+        "label": "Tents",
+        "line": 335
+      },
+      {
+        "type": "button",
+        "label": "Packs",
+        "line": 336
+      },
+      {
+        "type": "button",
+        "label": "Apparel",
+        "line": 337
+      },
+      {
+        "type": "button",
+        "label": "Filter Settings",
+        "line": 339
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 373
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 389
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 405
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 421
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 437
+      },
+      {
+        "type": "button",
+        "label": "Prev",
+        "line": 447
+      },
+      {
+        "type": "button",
+        "label": "Next",
+        "line": 448
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 500
+      },
+      {
+        "type": "button",
+        "label": "Refresh",
+        "line": 504
+      },
+      {
+        "type": "button",
+        "label": "Retry Load",
+        "line": 520
+      },
+      {
+        "type": "input",
+        "label": "Search inventory...",
+        "inputType": "text",
+        "placeholder": "Search inventory...",
+        "line": 214
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 363
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 379
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 395
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 411
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 427
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Inventory",
+        "href": "#",
+        "line": 246
+      },
+      {
+        "type": "link",
+        "label": "Bookings",
+        "href": "#",
+        "line": 252
+      },
+      {
+        "type": "link",
+        "label": "Customers",
+        "href": "#",
+        "line": 258
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 264
+      },
+      {
+        "type": "link",
+        "label": "Maintenance",
+        "href": "#",
+        "line": 270
+      },
+      {
+        "type": "link",
+        "label": "Support",
+        "href": "#",
+        "line": 280
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 286
+      },
+      {
+        "type": "link",
+        "label": "System Status: Operational",
+        "href": "#",
+        "line": 530
+      },
+      {
+        "type": "link",
+        "label": "Help Center",
+        "href": "#",
+        "line": 531
+      },
+      {
+        "type": "link",
+        "label": "Privacy Policy",
+        "href": "#",
+        "line": 532
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Add Gear",
+        "line": 218
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 219
+      },
+      {
+        "type": "button",
+        "label": "Quick Rental",
+        "line": 239
+      },
+      {
+        "type": "button",
+        "label": "All Items",
+        "line": 334
+      },
+      {
+        "type": "button",
+        "label": "Tents",
+        "line": 335
+      },
+      {
+        "type": "button",
+        "label": "Packs",
+        "line": 336
+      },
+      {
+        "type": "button",
+        "label": "Apparel",
+        "line": 337
+      },
+      {
+        "type": "button",
+        "label": "Filter Settings",
+        "line": 339
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 373
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 389
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 405
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 421
+      },
+      {
+        "type": "button",
+        "label": "Edit",
+        "line": 437
+      },
+      {
+        "type": "button",
+        "label": "Prev",
+        "line": 447
+      },
+      {
+        "type": "button",
+        "label": "Next",
+        "line": 448
+      },
+      {
+        "type": "button",
+        "label": "edit",
+        "line": 500
+      },
+      {
+        "type": "button",
+        "label": "Refresh",
+        "line": 504
+      },
+      {
+        "type": "button",
+        "label": "Retry Load",
+        "line": 520
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Search inventory...",
+        "inputType": "text",
+        "placeholder": "Search inventory...",
+        "line": 214
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 363
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 379
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 395
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 411
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 427
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 34,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "6c611827e5be4164abd4b1df3e19cfc3",
+    "screenTitle": "Item Editor - TrailHaus",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "button",
+        "label": "arrow_back",
+        "line": 214
+      },
+      {
+        "type": "button",
+        "label": "Cancel",
+        "line": 223
+      },
+      {
+        "type": "button",
+        "label": "Changes",
+        "line": 226
+      },
+      {
+        "type": "input",
+        "label": "Enter item name",
+        "inputType": "text",
+        "placeholder": "Enter item name",
+        "line": 248
+      },
+      {
+        "type": "input",
+        "label": "Enter unique SKU",
+        "inputType": "text",
+        "placeholder": "Enter unique SKU",
+        "line": 254
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 266
+      },
+      {
+        "type": "input",
+        "label": "Detailed technical specifications and usage guidelines...",
+        "inputType": "textarea",
+        "placeholder": "Detailed technical specifications and usage guidelines...",
+        "line": 279
+      },
+      {
+        "type": "input",
+        "label": "number",
+        "inputType": "number",
+        "line": 294
+      },
+      {
+        "type": "input",
+        "label": "radio",
+        "inputType": "radio",
+        "line": 302
+      },
+      {
+        "type": "input",
+        "label": "radio",
+        "inputType": "radio",
+        "line": 306
+      }
+    ],
+    "navigation": [],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "arrow_back",
+        "line": 214
+      },
+      {
+        "type": "button",
+        "label": "Cancel",
+        "line": 223
+      },
+      {
+        "type": "button",
+        "label": "Changes",
+        "line": 226
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Enter item name",
+        "inputType": "text",
+        "placeholder": "Enter item name",
+        "line": 248
+      },
+      {
+        "type": "input",
+        "label": "Enter unique SKU",
+        "inputType": "text",
+        "placeholder": "Enter unique SKU",
+        "line": 254
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 266
+      },
+      {
+        "type": "input",
+        "label": "Detailed technical specifications and usage guidelines...",
+        "inputType": "textarea",
+        "placeholder": "Detailed technical specifications and usage guidelines...",
+        "line": 279
+      },
+      {
+        "type": "input",
+        "label": "number",
+        "inputType": "number",
+        "line": 294
+      },
+      {
+        "type": "input",
+        "label": "radio",
+        "inputType": "radio",
+        "line": 302
+      },
+      {
+        "type": "input",
+        "label": "radio",
+        "inputType": "radio",
+        "line": 306
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 10,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  }
+]
