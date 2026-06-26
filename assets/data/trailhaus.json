@@ -1,0 +1,92 @@
+{
+  "version": "1.0.0",
+  "seeded": true,
+  "items": [
+    {
+      "id": "item-001",
+      "name": "Alpine Pro 2-Person Tent",
+      "sku": "TH-TNT-001",
+      "category": "Tents",
+      "status": "Available",
+      "dailyPrice": 24,
+      "stock": 8,
+      "description": "Ultralight mountaineering tent with reinforced poles and weatherproof fly."
+    },
+    {
+      "id": "item-002",
+      "name": "Summit 65L Expedition Pack",
+      "sku": "TH-PCK-002",
+      "category": "Packs",
+      "status": "Rented",
+      "dailyPrice": 18,
+      "stock": 4,
+      "description": "Technical 65-litre pack with internal frame and adjustable harness."
+    },
+    {
+      "id": "item-003",
+      "name": "Glacier Hardshell Jacket",
+      "sku": "TH-APP-003",
+      "category": "Apparel",
+      "status": "Available",
+      "dailyPrice": 15,
+      "stock": 12,
+      "description": "Waterproof breathable shell for alpine conditions."
+    },
+    {
+      "id": "item-004",
+      "name": "TrailBlazer 3-Season Tent",
+      "sku": "TH-TNT-004",
+      "category": "Tents",
+      "status": "Maintenance",
+      "dailyPrice": 20,
+      "stock": 0,
+      "description": "Spacious three-season tent with dual vestibules."
+    },
+    {
+      "id": "item-005",
+      "name": "Ascent 40L Daypack",
+      "sku": "TH-PCK-005",
+      "category": "Packs",
+      "status": "Available",
+      "dailyPrice": 10,
+      "stock": 15,
+      "description": "Lightweight daypack with hydration sleeve and gear loops."
+    },
+    {
+      "id": "item-006",
+      "name": "Merino Base Layer Top",
+      "sku": "TH-APP-006",
+      "category": "Apparel",
+      "status": "Available",
+      "dailyPrice": 8,
+      "stock": 20,
+      "description": "Thermal regulating merino wool base layer."
+    }
+  ],
+  "activities": [
+    {
+      "id": "act-001",
+      "type": "rental",
+      "message": "Summit 65L Expedition Pack checked out for 5 days",
+      "timestamp": "2026-06-25T09:00:00.000Z"
+    },
+    {
+      "id": "act-002",
+      "type": "return",
+      "message": "Alpine Pro 2-Person Tent returned early",
+      "timestamp": "2026-06-24T16:30:00.000Z"
+    },
+    {
+      "id": "act-003",
+      "type": "maintenance",
+      "message": "TrailBlazer 3-Season Tent flagged for repair",
+      "timestamp": "2026-06-23T11:15:00.000Z"
+    }
+  ],
+  "preferences": {
+    "viewDensity": "Balanced",
+    "defaultCategory": "All Items",
+    "notificationsEnabled": true,
+    "searchHistory": []
+  }
+}
