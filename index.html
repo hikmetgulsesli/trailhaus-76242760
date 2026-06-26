@@ -16,61 +16,7 @@
     <main data-setfarm-root="baseline" data-testid="setfarm-app-root" class="app-shell"></main>
     <script src="assets/js/trailhaus.state.js" defer></script>
     <script src="assets/js/trailhaus.storage.js" defer></script>
-    <script src="assets/js/us-002/act_search_records.js" defer></script>
-    <script src="assets/js/us-002/act_create_record.js" defer></script>
-    <script src="assets/js/us-002/act_select_record.js" defer></script>
-    <script src="assets/js/us-002/act_retry_load.js" defer></script>
     <script src="assets/js/app.js" defer></script>
     <script src="assets/js/test-bridge.js" defer></script>
-    <script defer>
-      (function () {
-        'use strict';
-
-        function addRouteLinks() {
-          var sideNav = document.querySelector('.side-nav');
-          if (sideNav && !sideNav.querySelector('[data-us-002-route="item-operations"]')) {
-            var opsLink = document.createElement('a');
-            opsLink.href = 'item-operations-trailhaus.html';
-            opsLink.className = 'nav-link';
-            opsLink.setAttribute('data-us-002-route', 'item-operations');
-            opsLink.setAttribute('data-testid', 'nav-item-operations');
-            opsLink.innerHTML = '<span class="icon-fallback">inventory_2</span><span>Item Operations</span>';
-            var list = sideNav.querySelector('.nav-list');
-            if (list) {
-              var li = document.createElement('li');
-              li.appendChild(opsLink);
-              list.insertBefore(li, list.firstChild);
-            }
-          }
-
-          var topBarRight = document.querySelector('.top-bar-right');
-          if (topBarRight && !topBarRight.querySelector('[data-us-002-route="item-editor"]')) {
-            var editorLink = document.createElement('a');
-            editorLink.href = 'item-editor-trailhaus.html';
-            editorLink.className = 'btn btn-secondary';
-            editorLink.setAttribute('data-us-002-route', 'item-editor');
-            editorLink.setAttribute('data-testid', 'top-item-editor-link');
-            editorLink.textContent = 'Item Editor';
-            topBarRight.insertBefore(editorLink, topBarRight.firstChild);
-          }
-        }
-
-        var retries = 0;
-        var maxRetries = 100;
-        function tryWire() {
-          addRouteLinks();
-          if (!document.querySelector('[data-us-002-route]') && retries < maxRetries) {
-            retries++;
-            setTimeout(tryWire, 50);
-          }
-        }
-
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', tryWire);
-        } else {
-          tryWire();
-        }
-      })();
-    </script>
   </body>
 </html>

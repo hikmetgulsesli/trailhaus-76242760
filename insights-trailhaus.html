@@ -1,0 +1,1258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insights - TrailHaus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      .insights-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .insights-title h2 {
+        margin: 0;
+        font-family: var(--font-headline-lg, "Archivo Narrow"), sans-serif;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 700;
+        color: var(--color-primary, #061b0e);
+      }
+      .insights-title p {
+        margin: 0.25rem 0 0 0;
+        font-family: var(--font-body-md, Inter), sans-serif;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .filter-wrap {
+        position: relative;
+      }
+      .filter-menu {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        right: 0;
+        min-width: 14rem;
+        background: var(--color-surface-container-lowest, #ffffff);
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-lg, 0.25rem);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        padding: 0.75rem;
+        display: none;
+        flex-direction: column;
+        gap: 0.75rem;
+        z-index: 50;
+      }
+      .filter-menu.open {
+        display: flex;
+      }
+      .filter-menu h4 {
+        margin: 0;
+        font-family: var(--font-label-sm, Inter), sans-serif;
+        font-size: 0.625rem;
+        line-height: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .filter-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .filter-option {
+        padding: 0.25rem 0.5rem;
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-DEFAULT, 0.125rem);
+        background: var(--color-surface, #f8f9fd);
+        color: var(--color-on-surface, #191c1f);
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .filter-option:hover,
+      .filter-option.active {
+        background: var(--color-primary-fixed, #d0e9d4);
+        border-color: var(--color-primary-fixed-dim, #b4cdb8);
+      }
+      .hint-banner {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--color-error-container, #ffdad6);
+        border-radius: var(--radius-lg, 0.25rem);
+        background: var(--color-error-container, #ffdad6);
+      }
+      .hint-banner.info {
+        background: var(--color-primary-fixed, #d0e9d4);
+        border-color: var(--color-primary-fixed-dim, #b4cdb8);
+      }
+      .hint-banner.warn {
+        background: var(--color-secondary-fixed, #ffdbce);
+        border-color: var(--color-secondary-fixed-dim, #ffb599);
+      }
+      .hint-icon {
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: var(--color-error, #ba1a1a);
+        flex-shrink: 0;
+      }
+      .hint-banner.info .hint-icon {
+        color: var(--color-primary, #061b0e);
+      }
+      .hint-banner.warn .hint-icon {
+        color: var(--color-secondary, #a63b00);
+      }
+      .hint-content h3 {
+        margin: 0 0 0.25rem 0;
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--color-on-background, #191c1f);
+      }
+      .hint-content p {
+        margin: 0;
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .hint-action {
+        margin-left: auto;
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--color-error, #ba1a1a);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-decoration: underline;
+        white-space: nowrap;
+      }
+      .hint-banner.info .hint-action {
+        color: var(--color-primary, #061b0e);
+      }
+      .hint-banner.warn .hint-action {
+        color: var(--color-secondary, #a63b00);
+      }
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .bento-grid > * {
+        grid-column: span 12;
+      }
+      @media (min-width: 768px) {
+        .bento-grid > .metric-card,
+        .bento-grid > .distribution-card {
+          grid-column: span 4;
+        }
+        .bento-grid > .activity-card {
+          grid-column: span 8;
+        }
+        .bento-grid > .secondary-card {
+          grid-column: span 4;
+        }
+      }
+      .metric-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 8rem;
+        padding: 1rem;
+        background: var(--color-surface-container-lowest, #ffffff);
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-lg, 0.25rem);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .metric-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+      .metric-icon {
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: var(--color-primary-container, #1b3022);
+      }
+      .metric-icon.accent {
+        color: var(--color-secondary, #a63b00);
+      }
+      .metric-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-DEFAULT, 0.125rem);
+        font-family: var(--font-label-sm, Inter), sans-serif;
+        font-size: 0.625rem;
+        line-height: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        background: var(--color-primary-fixed, #d0e9d4);
+        color: var(--color-on-primary-fixed, #0b2013);
+      }
+      .metric-pill.neutral {
+        background: var(--color-surface-container-high, #e6e8ec);
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .metric-card .metric-label {
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--color-on-surface-variant, #434843);
+        margin-bottom: 0.5rem;
+      }
+      .metric-card .metric-value {
+        font-family: var(--font-headline-lg, "Archivo Narrow"), sans-serif;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 700;
+        color: var(--color-on-background, #191c1f);
+      }
+      .metric-card .metric-caption {
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-outline, #737973);
+        margin-top: 0.5rem;
+      }
+      .distribution-card {
+        padding: 1rem;
+        background: var(--color-surface-container-lowest, #ffffff);
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-lg, 0.25rem);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .distribution-bar {
+        display: flex;
+        height: 1rem;
+        border-radius: var(--radius-DEFAULT, 0.125rem);
+        overflow: hidden;
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        margin-bottom: 1rem;
+      }
+      .distribution-segment {
+        height: 100%;
+      }
+      .distribution-segment.rented {
+        background: var(--color-primary-container, #1b3022);
+      }
+      .distribution-segment.available {
+        background: var(--color-surface-dim, #d8dade);
+      }
+      .distribution-segment.maintenance {
+        background: var(--color-secondary, #a63b00);
+      }
+      .distribution-legend {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .distribution-legend li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      .legend-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
+      .legend-dot.rented { background: var(--color-primary-container, #1b3022); }
+      .legend-dot.available { background: var(--color-surface-dim, #d8dade); }
+      .legend-dot.maintenance { background: var(--color-secondary, #a63b00); }
+      .activity-card {
+        background: var(--color-surface-container-lowest, #ffffff);
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-lg, 0.25rem);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+      .activity-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid var(--color-outline-variant, #c3c8c1);
+        background: var(--color-surface-bright, #f8f9fd);
+      }
+      .activity-header h3 {
+        margin: 0;
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--color-on-background, #191c1f);
+      }
+      .activity-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .activity-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid var(--color-outline-variant, #c3c8c1);
+        transition: background 0.15s ease;
+      }
+      .activity-row:last-child {
+        border-bottom: none;
+      }
+      .activity-row:hover {
+        background: var(--color-surface-bright, #f8f9fd);
+      }
+      .activity-icon {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 0.875rem;
+        flex-shrink: 0;
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+      }
+      .activity-icon.rental {
+        background: var(--color-primary-fixed, #d0e9d4);
+        color: var(--color-on-primary-fixed, #0b2013);
+        border-color: var(--color-primary-fixed-dim, #b4cdb8);
+      }
+      .activity-icon.return {
+        background: var(--color-surface-container-high, #e6e8ec);
+        color: var(--color-on-surface-variant, #434843);
+        border-color: var(--color-outline-variant, #c3c8c1);
+      }
+      .activity-icon.maintenance {
+        background: var(--color-error-container, #ffdad6);
+        color: var(--color-on-error-container, #410002);
+        border-color: var(--color-error, #ba1a1a);
+      }
+      .activity-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .activity-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 0.25rem;
+      }
+      .activity-title {
+        margin: 0;
+        font-family: var(--font-body-md, Inter), sans-serif;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 500;
+        color: var(--color-on-background, #191c1f);
+      }
+      .activity-time {
+        font-family: var(--font-label-sm, Inter), sans-serif;
+        font-size: 0.625rem;
+        line-height: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--color-outline, #737973);
+        white-space: nowrap;
+      }
+      .activity-message {
+        margin: 0;
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .activity-tag {
+        display: inline-block;
+        margin-top: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-DEFAULT, 0.125rem);
+        font-family: var(--font-label-sm, Inter), sans-serif;
+        font-size: 0.625rem;
+        line-height: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        background: var(--color-surface-container, #eceef1);
+        color: var(--color-on-surface-variant, #434843);
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+      }
+      .activity-tag.action {
+        background: var(--color-error-container, #ffdad6);
+        color: var(--color-error, #ba1a1a);
+        border-color: var(--color-error, #ba1a1a);
+      }
+      .secondary-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .callout-card {
+        padding: 1rem;
+        background: var(--color-surface-container-lowest, #ffffff);
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-lg, 0.25rem);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .callout-card h3 {
+        margin: 0 0 0.75rem 0;
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .callout-value {
+        font-family: var(--font-headline-xl, "Archivo Narrow"), sans-serif;
+        font-size: 3rem;
+        line-height: 3.5rem;
+        font-weight: 700;
+        color: var(--color-on-background, #191c1f);
+      }
+      .callout-unit {
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-outline, #737973);
+        margin-left: 0.25rem;
+      }
+      .callout-caption {
+        margin: 0.5rem 0 0 0;
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .logistics-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .logistics-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .logistics-list .icon {
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 1.25rem;
+        color: var(--color-outline, #737973);
+      }
+      .logistics-list p {
+        margin: 0;
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-on-background, #191c1f);
+      }
+      .logistics-list .meta {
+        margin: 0;
+        font-family: var(--font-label-sm, Inter), sans-serif;
+        font-size: 0.625rem;
+        line-height: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--color-outline, #737973);
+      }
+      .footer-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-outline-variant, #c3c8c1);
+      }
+      .footer-bar p {
+        margin: 0;
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--color-on-surface, #191c1f);
+      }
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+      .footer-links a {
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-on-surface-variant, #434843);
+        text-decoration: underline;
+        transition: color 0.15s ease;
+      }
+      .footer-links a:hover {
+        color: var(--color-primary, #061b0e);
+      }
+    </style>
+  </head>
+  <body>
+    <main data-setfarm-root="baseline" data-testid="setfarm-app-root" class="app-shell"></main>
+
+    <script src="assets/js/trailhaus.state.js" defer></script>
+    <script src="assets/js/trailhaus.storage.js" defer></script>
+    <script src="assets/js/us-002/act_retry_load.js" defer></script>
+    <script src="assets/js/us-003/act_filter_insights.js" defer></script>
+    <script src="assets/js/us-003/act_export_summary.js" defer></script>
+    <script src="assets/js/test-bridge.js" defer></script>
+
+    <script defer>
+      (function () {
+        'use strict';
+
+        var VIEWS = window.TrailHausState.VIEWS;
+        var state = window.TrailHausState.create();
+        window.TrailHausState._instance = state;
+        var storage = window.TrailHausStorage;
+        var seedUrl = 'assets/data/trailhaus.json';
+        var filterMenuOpen = false;
+
+        function el(tag, attrs, children) {
+          var node = document.createElement(tag);
+          if (attrs) {
+            Object.keys(attrs).forEach(function (key) {
+              if (key === 'className') node.className = attrs[key];
+              else if (key === 'textContent') node.textContent = attrs[key];
+              else if (key === 'innerHTML') node.innerHTML = attrs[key];
+              else if (key === 'style') node.style.cssText = attrs[key];
+              else if (key.startsWith('data-')) node.setAttribute(key, attrs[key]);
+              else if (key.startsWith('on') && typeof attrs[key] === 'function') {
+                node.addEventListener(key.slice(2).toLowerCase(), attrs[key]);
+              } else {
+                node[key] = attrs[key];
+              }
+            });
+          }
+          if (children) {
+            children.forEach(function (child) {
+              if (child === null || child === undefined) return;
+              node.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+            });
+          }
+          return node;
+        }
+
+        function iconSvg(symbol) {
+          return el('span', { className: 'icon-fallback', textContent: symbol });
+        }
+
+        function formatTimeAgo(timestamp) {
+          var date = new Date(timestamp);
+          if (isNaN(date.getTime())) return timestamp || '';
+          var now = new Date();
+          var diffMs = now - date;
+          var diffMins = Math.floor(diffMs / 60000);
+          var diffHours = Math.floor(diffMs / 3600000);
+          var diffDays = Math.floor(diffMs / 86400000);
+          if (diffMins < 1) return 'just now';
+          if (diffMins < 60) return diffMins + ' min ago';
+          if (diffHours < 24) return diffHours + ' hr ago';
+          if (diffDays < 7) return diffDays + ' days ago';
+          return date.toLocaleDateString();
+        }
+
+        function getFilterCategory() {
+          return state.get('ui.selectedCategory') || 'All Items';
+        }
+
+        function getFilterStatus() {
+          return state.get('ui.insightsStatusFilter') || 'All';
+        }
+
+        function getTimeRange() {
+          return state.get('ui.insightsTimeRange') || 'All';
+        }
+
+        function getSearchQuery() {
+          return (state.get('ui.searchQuery') || '').toLowerCase();
+        }
+
+        function filteredItems() {
+          var items = state.get('items') || [];
+          var category = getFilterCategory();
+          var status = getFilterStatus();
+          var query = getSearchQuery();
+          return items.filter(function (item) {
+            var matchesCategory = category === 'All Items' || item.category === category;
+            var matchesStatus = status === 'All' || item.status === status;
+            var matchesQuery = !query ||
+              (item.name && item.name.toLowerCase().indexOf(query) > -1) ||
+              (item.sku && item.sku.toLowerCase().indexOf(query) > -1);
+            return matchesCategory && matchesStatus && matchesQuery;
+          });
+        }
+
+        function filteredActivities() {
+          var activities = (state.get('activities') || []).slice();
+          var range = getTimeRange();
+          var query = getSearchQuery();
+          var now = new Date();
+          return activities.filter(function (act) {
+            var matchesRange = true;
+            if (range !== 'All' && act.timestamp) {
+              var ts = new Date(act.timestamp);
+              var days = range === 'Last 7 days' ? 7 : 30;
+              matchesRange = (now - ts) <= days * 86400000;
+            }
+            var matchesQuery = !query ||
+              (act.message && act.message.toLowerCase().indexOf(query) > -1) ||
+              (act.type && act.type.toLowerCase().indexOf(query) > -1);
+            return matchesRange && matchesQuery;
+          }).sort(function (a, b) {
+            var tA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+            var tB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+            return (isNaN(tB) ? 0 : tB) - (isNaN(tA) ? 0 : tA);
+          });
+        }
+
+        function getMetrics() {
+          var items = filteredItems();
+          var total = items.length;
+          var active = items.filter(function (i) { return i.status === 'Rented'; }).length;
+          var available = items.filter(function (i) { return i.status === 'Available'; }).length;
+          var maintenance = items.filter(function (i) { return i.status === 'Maintenance'; }).length;
+
+          var categories = {};
+          items.forEach(function (item) {
+            categories[item.category] = (categories[item.category] || 0) + 1;
+          });
+          var topCategory = Object.keys(categories).sort(function (a, b) {
+            return categories[b] - categories[a];
+          })[0] || '—';
+
+          var avgDailyPrice = total > 0
+            ? items.reduce(function (sum, i) { return sum + (Number(i.dailyPrice) || 0); }, 0) / total
+            : 0;
+
+          return {
+            total: total,
+            active: active,
+            available: available,
+            maintenance: maintenance,
+            topCategory: topCategory,
+            avgDailyPrice: Math.round(avgDailyPrice * 100) / 100
+          };
+        }
+
+        function getDistribution(metrics) {
+          var total = metrics.total;
+          if (total === 0) return [];
+          return [
+            { key: 'rented', label: 'Active Rentals', value: metrics.active, percent: metrics.active / total },
+            { key: 'available', label: 'Ready Stock', value: metrics.available, percent: metrics.available / total },
+            { key: 'maintenance', label: 'Maintenance / Repair', value: metrics.maintenance, percent: metrics.maintenance / total }
+          ];
+        }
+
+        function savePersistedState() {
+          var result = storage.save(state.getSnapshot());
+          if (!result.ok) {
+            state.set('storageStatus', 'error');
+            state.set('lastError', result.error || 'Failed to save state.');
+          } else {
+            state.set('storageStatus', 'saved');
+          }
+          return result.ok;
+        }
+
+        function retryLoad() {
+          state.set('ui.isLoading', true);
+          state.set('ui.errorMessage', '');
+          return window.fetch(seedUrl)
+            .then(function (res) {
+              if (!res.ok) throw new Error('Seed fetch failed: ' + res.statusText);
+              return res.json();
+            })
+            .then(function (data) {
+              state.replace(data);
+              state.set('storageStatus', 'loaded');
+              state.set('lastError', null);
+              state.set('ui.isLoading', false);
+              savePersistedState();
+              return true;
+            })
+            .catch(function (err) {
+              state.set('storageStatus', 'error');
+              state.set('lastError', err && err.message ? err.message : 'Retry failed');
+              state.set('ui.isLoading', false);
+              state.set('ui.errorMessage', 'Unable to load data. Please try again.');
+              return false;
+            });
+        }
+
+        function setFilterMenuOpen(open) {
+          filterMenuOpen = open;
+          var menu = document.querySelector('[data-testid="insights-filter-menu"]');
+          if (menu) menu.classList.toggle('open', open);
+        }
+
+        function applyCategory(category) {
+          window.TrailHausActions.ACT_FILTER_INSIGHTS.setCategory(category);
+          setFilterMenuOpen(false);
+        }
+
+        function applyStatus(status) {
+          window.TrailHausActions.ACT_FILTER_INSIGHTS.setStatus(status);
+          setFilterMenuOpen(false);
+        }
+
+        function applyTimeRange(range) {
+          window.TrailHausActions.ACT_FILTER_INSIGHTS.setTimeRange(range);
+          setFilterMenuOpen(false);
+        }
+
+        function renderFilterMenu() {
+          var categories = ['All Items', 'Tents', 'Packs', 'Apparel'];
+          var statuses = ['All', 'Available', 'Rented', 'Maintenance'];
+          var ranges = ['All', 'Last 7 days', 'Last 30 days'];
+          var currentCategory = getFilterCategory();
+          var currentStatus = getFilterStatus();
+          var currentRange = getTimeRange();
+
+          return el('div', {
+            className: 'filter-menu' + (filterMenuOpen ? ' open' : ''),
+            'data-testid': 'insights-filter-menu'
+          }, [
+            el('h4', { textContent: 'Category' }),
+            el('div', { className: 'filter-options' }, categories.map(function (cat) {
+              return el('button', {
+                className: 'filter-option' + (cat === currentCategory ? ' active' : ''),
+                textContent: cat,
+                'data-action-id': 'ACT_FILTER_INSIGHTS',
+                'data-filter-type': 'category',
+                'data-filter-value': cat,
+                onClick: function () { applyCategory(cat); }
+              });
+            })),
+            el('h4', { textContent: 'Status' }),
+            el('div', { className: 'filter-options' }, statuses.map(function (s) {
+              return el('button', {
+                className: 'filter-option' + (s === currentStatus ? ' active' : ''),
+                textContent: s,
+                'data-action-id': 'ACT_FILTER_INSIGHTS',
+                'data-filter-type': 'status',
+                'data-filter-value': s,
+                onClick: function () { applyStatus(s); }
+              });
+            })),
+            el('h4', { textContent: 'Time Range' }),
+            el('div', { className: 'filter-options' }, ranges.map(function (r) {
+              return el('button', {
+                className: 'filter-option' + (r === currentRange ? ' active' : ''),
+                textContent: r,
+                'data-action-id': 'ACT_FILTER_INSIGHTS',
+                'data-filter-type': 'timeRange',
+                'data-filter-value': r,
+                onClick: function () { applyTimeRange(r); }
+              });
+            })),
+            el('button', {
+              className: 'filter-option',
+              textContent: 'Reset Filters',
+              'data-action-id': 'ACT_FILTER_INSIGHTS',
+              onClick: function () {
+                window.TrailHausActions.ACT_FILTER_INSIGHTS.resetFilters();
+                setFilterMenuOpen(false);
+              }
+            })
+          ]);
+        }
+
+        function renderToolbar() {
+          return el('div', { className: 'toolbar' }, [
+            el('input', {
+              type: 'text',
+              className: 'search-input',
+              placeholder: 'Search insights...',
+              value: state.get('ui.searchQuery') || '',
+              'data-testid': 'search-insights',
+              'data-action-id': 'ACT_FILTER_INSIGHTS',
+              onInput: function (e) {
+                window.TrailHausActions.ACT_FILTER_INSIGHTS.handleInput(e);
+              }
+            }),
+            el('div', { className: 'filter-wrap' }, [
+              el('button', {
+                className: 'btn btn-secondary',
+                textContent: 'Filter',
+                'data-action-id': 'ACT_FILTER_INSIGHTS',
+                'data-testid': 'insights-filter-btn',
+                onClick: function (e) {
+                  e.stopPropagation();
+                  setFilterMenuOpen(!filterMenuOpen);
+                }
+              }),
+              renderFilterMenu()
+            ]),
+            el('button', {
+              className: 'btn btn-secondary',
+              textContent: 'Export Summary',
+              'data-action-id': 'ACT_EXPORT_SUMMARY',
+              'data-testid': 'insights-export-btn',
+              onClick: function () {
+                window.TrailHausActions.ACT_EXPORT_SUMMARY.downloadSummary('json');
+              }
+            })
+          ]);
+        }
+
+        function renderHint(metrics) {
+          var items = state.get('items') || [];
+          var maintenanceIds = items.filter(function (i) { return i.status === 'Maintenance'; }).map(function (i) { return i.id; });
+          var lowStock = items.filter(function (i) { return i.status === 'Available' && i.stock < 3; });
+
+          var tone = 'info';
+          var icon = 'info';
+          var title = 'Inventory Stable';
+          var message = 'No immediate follow-up required. Demand and stock levels look balanced.';
+          var actionText = 'Review Items';
+          var actionHref = 'item-operations-trailhaus.html';
+
+          if (maintenanceIds.length > 0) {
+            tone = 'warn';
+            icon = 'warning';
+            title = 'Immediate Action Required';
+            message = maintenanceIds.length + ' item(s) are under maintenance. Review them before the next rental window.';
+          } else if (lowStock.length > 0) {
+            tone = 'warn';
+            icon = 'warning';
+            title = 'Low Stock Alert';
+            message = lowStock.length + ' available item(s) are running low on stock.';
+          }
+
+          return el('div', { className: 'hint-banner ' + tone }, [
+            el('span', { className: 'hint-icon', textContent: icon }),
+            el('div', { className: 'hint-content' }, [
+              el('h3', { textContent: title }),
+              el('p', { textContent: message })
+            ]),
+            el('a', {
+              className: 'hint-action',
+              href: actionHref,
+              'data-action-id': 'ACT_REVIEW_ITEMS',
+              textContent: actionText
+            })
+          ]);
+        }
+
+        function renderMetricCard(label, value, caption, icon, tone, pill) {
+          return el('div', { className: 'metric-card' }, [
+            el('div', { className: 'metric-card-top' }, [
+              el('span', { className: 'metric-icon ' + (tone || ''), textContent: icon }),
+              pill ? el('span', { className: 'metric-pill neutral', textContent: pill }) : null
+            ]),
+            el('div', null, [
+              el('div', { className: 'metric-label', textContent: label }),
+              el('div', { className: 'metric-value', textContent: value }),
+              caption ? el('div', { className: 'metric-caption', textContent: caption }) : null
+            ])
+          ]);
+        }
+
+        function renderMetrics(metrics) {
+          return [
+            renderMetricCard('Total Items', metrics.total, 'Current inventory scope', 'timer', '', 'Live'),
+            renderMetricCard('Active Rentals', metrics.active, 'Items currently rented', 'terrain', 'accent', metrics.active > 0 ? 'In Use' : 'Stable'),
+            renderMetricCard('Available Items', metrics.available, 'Ready for next booking', 'inventory', '', metrics.available > 0 ? 'Ready' : 'None'),
+            renderMetricCard('Maintenance', metrics.maintenance, 'Items under repair', 'warning', 'accent', metrics.maintenance > 0 ? 'Action' : 'Clear'),
+            renderMetricCard('Top Category', metrics.topCategory, 'Most represented category', 'category', '', ''),
+            renderMetricCard('Avg Daily Rate', '$' + metrics.avgDailyPrice.toFixed(2), 'Across filtered items', 'payments', '', '')
+          ];
+        }
+
+        function renderDistribution(metrics) {
+          var distribution = getDistribution(metrics);
+          if (distribution.length === 0) {
+            return el('div', { className: 'distribution-card' }, [
+              el('h3', { className: 'metric-label', textContent: 'Inventory State' }),
+              el('p', { className: 'empty-state', textContent: 'No data to display.' })
+            ]);
+          }
+
+          var bar = el('div', { className: 'distribution-bar' });
+          distribution.forEach(function (seg) {
+            if (seg.value > 0) {
+              bar.appendChild(el('div', {
+                className: 'distribution-segment ' + seg.key,
+                style: 'width:' + (seg.percent * 100).toFixed(1) + '%;',
+                title: seg.label + ' (' + Math.round(seg.percent * 100) + '%)'
+              }));
+            }
+          });
+
+          var legend = el('ul', { className: 'distribution-legend' });
+          distribution.forEach(function (seg) {
+            legend.appendChild(el('li', null, [
+              el('span', null, [
+                el('span', { className: 'legend-dot ' + seg.key }),
+                el('span', { textContent: seg.label })
+              ]),
+              el('span', { className: 'metric-pill neutral', textContent: Math.round(seg.percent * 100) + '% (' + seg.value + ')' })
+            ]));
+          });
+
+          return el('div', { className: 'distribution-card' }, [
+            el('h3', { className: 'metric-label', textContent: 'Inventory State' }),
+            bar,
+            legend
+          ]);
+        }
+
+        function renderActivityIcon(type) {
+          var map = { rental: 'check_circle', return: 'check_circle', maintenance: 'report' };
+          return iconSvg(map[type] || 'circle');
+        }
+
+        function renderActivities() {
+          var activities = filteredActivities();
+          if (activities.length === 0) {
+            return el('div', { className: 'activity-card' }, [
+              el('div', { className: 'activity-header' }, [
+                el('h3', { textContent: 'Activity Pipeline' })
+              ]),
+              el('p', { className: 'empty-state', textContent: 'No recent activity matches the current filter.' })
+            ]);
+          }
+
+          var list = el('ul', { className: 'activity-list' });
+          activities.forEach(function (act) {
+            var tagText = act.type === 'maintenance' ? 'Action Required' : 'System: Auto';
+            var tagClass = act.type === 'maintenance' ? 'activity-tag action' : 'activity-tag';
+            list.appendChild(el('li', { className: 'activity-row' }, [
+              el('span', { className: 'activity-icon ' + act.type }, [renderActivityIcon(act.type)]),
+              el('div', { className: 'activity-body' }, [
+                el('div', { className: 'activity-title-row' }, [
+                  el('h4', { className: 'activity-title', textContent: act.type.charAt(0).toUpperCase() + act.type.slice(1) }),
+                  el('span', { className: 'activity-time', textContent: formatTimeAgo(act.timestamp) })
+                ]),
+                el('p', { className: 'activity-message', textContent: act.message }),
+                el('span', { className: tagClass, textContent: tagText })
+              ])
+            ]));
+          });
+
+          return el('div', { className: 'activity-card' }, [
+            el('div', { className: 'activity-header' }, [
+              el('h3', { textContent: 'Activity Pipeline' }),
+              el('button', {
+                className: 'btn btn-small btn-secondary',
+                textContent: 'View All',
+                'data-action-id': 'ACT_VIEW_ALL',
+                onClick: function () {
+                  window.TrailHausActions.ACT_FILTER_INSIGHTS.setTimeRange('All');
+                }
+              })
+            ]),
+            list
+          ]);
+        }
+
+        function renderSecondaryStats(metrics) {
+          var items = state.get('items') || [];
+          var maintenance = items.filter(function (i) { return i.status === 'Maintenance'; }).length;
+          var outbound = items.filter(function (i) { return i.status === 'Rented'; }).length;
+          var returns = items.filter(function (i) { return i.status === 'Available' && i.stock > 0; }).length;
+
+          return el('div', { className: 'secondary-card' }, [
+            el('div', { className: 'callout-card' }, [
+              el('h3', { textContent: 'Turnaround Efficiency' }),
+              el('div', null, [
+                el('span', { className: 'callout-value', textContent: '4.2' }),
+                el('span', { className: 'callout-unit', textContent: 'h avg' })
+              ]),
+              el('p', { className: 'callout-caption', textContent: 'Target: return to ready-stock status under 6 hours.' })
+            ]),
+            el('div', { className: 'callout-card' }, [
+              el('h3', { textContent: 'Upcoming Logistics' }),
+              el('ul', { className: 'logistics-list' }, [
+                el('li', null, [
+                  el('span', { className: 'icon', textContent: 'local_shipping' }),
+                  el('div', null, [
+                    el('p', { textContent: 'Outbound Shipments' }),
+                    el('p', { className: 'meta', textContent: outbound + ' active rental(s)' })
+                  ])
+                ]),
+                el('li', null, [
+                  el('span', { className: 'icon', textContent: 'inventory' }),
+                  el('div', null, [
+                    el('p', { textContent: 'Expected Returns / Repairs' }),
+                    el('p', { className: 'meta', textContent: maintenance + ' maintenance item(s)' })
+                  ])
+                ])
+              ])
+            ])
+          ]);
+        }
+
+        function renderErrorState() {
+          var lastError = state.get('lastError') || state.get('ui.errorMessage') || 'Data unavailable.';
+          return el('div', { className: 'empty-state' }, [
+            el('p', { textContent: lastError }),
+            el('button', {
+              className: 'btn btn-secondary',
+              textContent: 'Retry Load',
+              'data-action-id': 'ACT_RETRY_LOAD',
+              onClick: function () { retryLoad(); }
+            })
+          ]);
+        }
+
+        function renderInsights() {
+          var items = state.get('items') || [];
+          if (state.get('storageStatus') === 'error' && items.length === 0) {
+            return renderErrorState();
+          }
+          if (items.length === 0) {
+            return el('p', { className: 'empty-state', textContent: 'No item data available. Add gear or retry loading data.' });
+          }
+
+          var metrics = getMetrics();
+          var metricCards = renderMetrics(metrics);
+
+          var grid = el('div', { className: 'bento-grid' }, [
+            metricCards[0],
+            metricCards[1],
+            renderDistribution(metrics),
+            metricCards[2],
+            metricCards[3],
+            metricCards[4],
+            metricCards[5],
+            renderActivities(),
+            renderSecondaryStats(metrics)
+          ]);
+
+          return el('div', { className: 'view view-insights' }, [
+            renderHint(metrics),
+            grid
+          ]);
+        }
+
+        function updateFilterMenu() {
+          var menu = document.querySelector('[data-testid="insights-filter-menu"]');
+          if (!menu) return;
+          var category = getFilterCategory();
+          var status = getFilterStatus();
+          var range = getTimeRange();
+          menu.querySelectorAll('.filter-option[data-filter-type]').forEach(function (btn) {
+            var type = btn.getAttribute('data-filter-type');
+            var value = btn.getAttribute('data-filter-value');
+            var active = false;
+            if (type === 'category') active = value === category;
+            else if (type === 'status') active = value === status;
+            else if (type === 'timeRange') active = value === range;
+            btn.classList.toggle('active', active);
+          });
+        }
+
+        function render() {
+          var main = document.querySelector('[data-testid="main-content"]');
+          if (!main) return;
+          var body = main.querySelector('.content-body');
+          if (!body) return;
+          body.innerHTML = '';
+          body.appendChild(renderInsights());
+          updateFilterMenu();
+        }
+
+        function buildNavItem(view, label, href, active) {
+          return el('a', {
+            href: href || '#',
+            className: 'nav-link' + (active ? ' active' : ''),
+            'data-testid': 'nav-' + view,
+            onClick: function (e) {
+              if (!href || href === '#') e.preventDefault();
+            }
+          }, [iconSvg(view), el('span', { textContent: label })]);
+        }
+
+        function buildShell() {
+          var topBar = el('header', { className: 'top-bar' }, [
+            el('div', { className: 'top-bar-left' }, [
+              iconSvg('search'),
+              el('input', {
+                type: 'text',
+                className: 'top-search',
+                placeholder: 'Search insights...',
+                value: state.get('ui.searchQuery') || '',
+                'data-testid': 'top-search',
+                'data-action-id': 'ACT_FILTER_INSIGHTS',
+                onInput: function (e) {
+                  window.TrailHausActions.ACT_FILTER_INSIGHTS.handleInput(e);
+                }
+              })
+            ]),
+            el('div', { className: 'top-bar-right' }, [
+              el('button', {
+                className: 'btn btn-primary',
+                textContent: 'Add Gear',
+                'data-action-id': 'ACT_CREATE_RECORD',
+                onClick: function () { window.location.href = 'item-editor-trailhaus.html?mode=create'; }
+              }),
+              el('span', { className: 'storage-status', 'data-testid': 'storage-status' }),
+              el('button', { className: 'icon-btn', 'data-testid': 'notifications-btn', title: 'Notifications' }, [iconSvg('notifications')]),
+              el('button', { className: 'icon-btn', 'data-testid': 'account-btn', title: 'Account' }, [iconSvg('account_circle')]),
+              el('button', { className: 'icon-btn', 'data-testid': 'settings-btn', title: 'Settings' }, [iconSvg('settings')])
+            ])
+          ]);
+
+          var sideNav = el('nav', { className: 'side-nav' }, [
+            el('div', { className: 'brand' }, [
+              el('div', { className: 'brand-logo' }, [iconSvg('landscape')]),
+              el('div', { className: 'brand-text' }, [
+                el('h1', { textContent: 'TrailHaus' }),
+                el('p', { textContent: 'Admin Hub' })
+              ])
+            ]),
+            el('button', { className: 'btn btn-outline quick-rental', 'data-action-id': 'ACT_QUICK_RENTAL' }, [iconSvg('bolt'), el('span', { textContent: 'Quick Rental' })]),
+            el('div', { className: 'nav-scroll' }, [
+              el('ul', { className: 'nav-list' }, [
+                el('li', null, [buildNavItem('inventory', 'Inventory', 'item-operations-trailhaus.html', false)]),
+                el('li', null, [buildNavItem('bookings', 'Bookings', 'index.html?view=bookings', false)]),
+                el('li', null, [buildNavItem('customers', 'Customers', 'index.html?view=customers', false)]),
+                el('li', null, [buildNavItem('insights', 'Insights', 'insights-trailhaus.html', true)]),
+                el('li', null, [buildNavItem('maintenance', 'Maintenance', 'index.html?view=maintenance', false)])
+              ])
+            ]),
+            el('div', { className: 'nav-bottom' }, [
+              el('ul', { className: 'nav-list' }, [
+                el('li', null, [buildNavItem('support', 'Support', 'index.html?view=support', false)]),
+                el('li', null, [buildNavItem('settings', 'settings', 'index.html?view=settings', false)])
+              ])
+            ])
+          ]);
+
+          var main = el('main', { className: 'main-content', 'data-testid': 'main-content' }, [
+            el('div', { className: 'insights-header' }, [
+              el('div', { className: 'insights-title' }, [
+                el('h2', { className: 'content-header', textContent: 'Operational Insights' }),
+                el('p', { textContent: 'Real-time performance and inventory telemetry.' })
+              ]),
+              renderToolbar()
+            ]),
+            el('div', { className: 'content-body' })
+          ]);
+
+          var root = document.querySelector('[data-setfarm-root="baseline"]');
+          if (root) {
+            root.innerHTML = '';
+            root.appendChild(sideNav);
+            root.appendChild(topBar);
+            root.appendChild(main);
+          }
+
+          document.addEventListener('click', function () {
+            if (filterMenuOpen) setFilterMenuOpen(false);
+          });
+        }
+
+        function bootstrap() {
+          buildShell();
+          state.subscribe(function (currentState, path) {
+            if (path === '*' || path.indexOf('items') === 0 || path.indexOf('ui') === 0) {
+              render();
+            }
+            if (path !== 'storageStatus' && path !== 'lastError' && path.indexOf('activePanel') !== 0) {
+              savePersistedState();
+            }
+          });
+          render();
+        }
+
+        function init() {
+          state.set('currentView', VIEWS.INSIGHTS);
+          state.set('activePanel', 'insights');
+          var saved = storage.load();
+          if (saved.ok && saved.state && saved.state.items && saved.state.items.length) {
+            state.replace(saved.state);
+            state.set('storageStatus', 'loaded');
+            bootstrap();
+          } else {
+            fetch(seedUrl)
+              .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error(res.statusText)); })
+              .then(function (data) {
+                state.replace(data);
+                savePersistedState();
+                bootstrap();
+              })
+              .catch(function (err) {
+                state.set('storageStatus', 'error');
+                state.set('lastError', err && err.message ? err.message : 'Failed to seed data.');
+                bootstrap();
+              });
+          }
+        }
+
+        window.TrailHausApp = {
+          state: state,
+          storage: storage,
+          render: render,
+          getMetrics: getMetrics,
+          filteredItems: filteredItems,
+          filteredActivities: filteredActivities
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>
