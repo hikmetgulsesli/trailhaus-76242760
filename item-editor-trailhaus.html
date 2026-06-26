@@ -270,9 +270,9 @@
                 sku: skuInput.value,
                 category: categorySelect.value,
                 description: descriptionInput.value,
-                dailyPrice: parseFloat(priceInput.value) || 0,
-                stock: parseInt(stockInput.value, 10) || 0,
-                status: form.querySelector('input[name="status"]:checked').value
+                dailyPrice: parseFloat(priceInput.value),
+                stock: parseInt(stockInput.value, 10),
+                status: (form.querySelector('input[name="status"]:checked') || {}).value || 'Available'
               };
               var result = window.TrailHausActions.ACT_SAVE_RECORD.saveRecord(formData);
               if (result.ok) {

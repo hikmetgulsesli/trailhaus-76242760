@@ -55,9 +55,12 @@
           }
         }
 
+        var retries = 0;
+        var maxRetries = 100;
         function tryWire() {
           addRouteLinks();
-          if (!document.querySelector('[data-us-002-route]')) {
+          if (!document.querySelector('[data-us-002-route]') && retries < maxRetries) {
+            retries++;
             setTimeout(tryWire, 50);
           }
         }

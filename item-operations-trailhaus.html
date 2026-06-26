@@ -78,8 +78,8 @@
           return items.filter(function (item) {
             var matchesCategory = category === 'All Items' || item.category === category;
             var matchesQuery = !query ||
-              item.name.toLowerCase().indexOf(query) > -1 ||
-              item.sku.toLowerCase().indexOf(query) > -1;
+              (item.name && item.name.toLowerCase().indexOf(query) > -1) ||
+              (item.sku && item.sku.toLowerCase().indexOf(query) > -1);
             return matchesCategory && matchesQuery;
           });
         }
@@ -222,8 +222,8 @@
 
         function renderPagination() {
           return el('div', { className: 'toolbar' }, [
-            el('button', { className: 'btn btn-secondary', textContent: 'Prev', 'data-action-id': 'ACT_PREV_PAGE' }, []),
-            el('button', { className: 'btn btn-secondary', textContent: 'Next', 'data-action-id': 'ACT_NEXT_PAGE' }, [])
+            el('button', { className: 'btn btn-secondary', textContent: 'Prev', disabled: true, 'data-action-id': 'ACT_PREV_PAGE' }, []),
+            el('button', { className: 'btn btn-secondary', textContent: 'Next', disabled: true, 'data-action-id': 'ACT_NEXT_PAGE' }, [])
           ]);
         }
 

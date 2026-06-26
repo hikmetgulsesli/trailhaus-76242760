@@ -17,8 +17,8 @@
     var errors = [];
     if (!item.name || !item.name.trim()) errors.push('Item name is required.');
     if (!item.sku || !item.sku.trim()) errors.push('SKU is required.');
-    if (typeof item.dailyPrice !== 'number' || item.dailyPrice < 0) errors.push('Price must be a non-negative number.');
-    if (typeof item.stock !== 'number' || item.stock < 0) errors.push('Stock must be a non-negative number.');
+    if (typeof item.dailyPrice !== 'number' || isNaN(item.dailyPrice) || item.dailyPrice < 0) errors.push('Price must be a non-negative number.');
+    if (typeof item.stock !== 'number' || isNaN(item.stock) || item.stock < 0) errors.push('Stock must be a non-negative number.');
     return errors;
   }
 
