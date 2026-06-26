@@ -130,6 +130,90 @@
     }, 3000);
   }
 
+  function setStorageStatusUI(message, type) {
+    var badge = document.querySelector('[data-testid="storage-status"]');
+    if (!badge) return;
+    badge.textContent = message || '';
+    badge.className = 'storage-status' + (type ? ' status-' + type : '');
+    if (type === 'error') return;
+    // Transient feedback for non-error states.
+    if (badge._clearTimer) clearTimeout(badge._clearTimer);
+    badge._clearTimer = setTimeout(function () {
+      badge.textContent = '';
+      badge.className = 'storage-status';
+    }, 2000);
+  }
+
+  function showStorageFeedback(message, type) {
+    var container = document.querySelector('[data-testid="main-content"]');
+    if (!container) return;
+    var banner = el('div', {
+      className: 'banner-storage-feedback banner-storage-' + (type || 'info'),
+      textContent: message,
+      'data-testid': 'storage-feedback-banner'
+    });
+    container.insertBefore(banner, container.firstChild);
+    setTimeout(function () {
+      if (banner.parentNode) banner.parentNode.removeChild(banner);
+    }, 3000);
+  }
+
+  function loadPersistedState() {
+    var result = storage.load();
+    if (!result.ok) {
+      state.set('storageStatus', 'error');
+      state.set('lastError', result.error || 'Failed to load persisted state.');
+      setStorageStatusUI('Storage error', 'error');
+      showStorageFeedback('Storage unavailable: ' + (result.error || ''), 'error');
+      return null;
+    }
+    if (result.recovered) {
+      state.set('storageStatus', 'recovered');
+      state.set('lastError', 'Persisted data was corrupted; recovered from backup.');
+      setStorageStatusUI('Recovered', 'warn');
+      showStorageFeedback('Persisted data was corrupted; recovered from backup.', 'warn');
+      return result.state;
+    }
+    if (!result.state) {
+      state.set('storageStatus', 'empty');
+      return null;
+    }
+    state.set('storageStatus', 'loaded');
+    setStorageStatusUI('Loaded', 'info');
+    return result.state;
+  }
+
+  function savePersistedState() {
+    var result = storage.save(state.getSnapshot());
+    if (!result.ok) {
+      state.set('storageStatus', 'error');
+      state.set('lastError', result.error || 'Failed to save state.');
+      setStorageStatusUI('Save failed', 'error');
+      showStorageFeedback('Failed to save state: ' + (result.error || ''), 'error');
+      return false;
+    }
+    state.set('storageStatus', 'saved');
+    state.set('lastError', null);
+    setStorageStatusUI('Saved', 'success');
+    return true;
+  }
+
+  function clearPersistedState() {
+    var result = storage.clear();
+    if (!result.ok) {
+      state.set('storageStatus', 'error');
+      state.set('lastError', result.error || 'Failed to clear storage.');
+      setStorageStatusUI('Clear failed', 'error');
+      showStorageFeedback('Failed to clear storage: ' + (result.error || ''), 'error');
+      return false;
+    }
+    state.set('storageStatus', 'cleared');
+    state.set('lastError', null);
+    setStorageStatusUI('Cleared', 'info');
+    showStorageFeedback('Storage cleared.', 'info');
+    return true;
+  }
+
   function renderInventory() {
     var metrics = getMetrics();
     var items = filteredItems();
@@ -203,6 +287,8 @@
         textContent: 'Edit',
         'data-action-id': 'ACT_SELECT_RECORD',
         onClick: function () {
+          state.set('selectedItem', item);
+          state.set('activePanel', 'item-editor');
           var newName = window.prompt('Edit item name:', item.name);
           if (newName === null) return;
           state.update('items', function (items) {
@@ -461,6 +547,8 @@
       onClick: function (e) {
         e.preventDefault();
         state.set('currentView', view);
+        state.set('activePanel', view);
+        state.set('selectedItem', null);
       }
     }, [
       iconSvg(symbol),
@@ -473,7 +561,20 @@
       type: 'text',
       className: 'top-search',
       placeholder: 'Search...',
-      'data-testid': 'top-search'
+      'data-testid': 'top-search',
+      value: state.get('ui.searchQuery') || '',
+      onInput: function (e) {
+        state.set('ui.searchQuery', e.target.value);
+        state.update('preferences', function (prefs) {
+          var history = (prefs.searchHistory || []).slice();
+          var query = e.target.value.trim();
+          if (query && history.indexOf(query) === -1) {
+            history.unshift(query);
+            if (history.length > 5) history.pop();
+          }
+          return Object.assign({}, prefs, { searchHistory: history });
+        });
+      }
     });
 
     var addGearButton = el('button', {
@@ -490,6 +591,13 @@
       }
     });
 
+    var storageStatusBadge = el('span', {
+      className: 'storage-status',
+      'data-testid': 'storage-status',
+      textContent: '',
+      title: 'Storage status'
+    });
+
     var topBar = el('header', { className: 'top-bar' }, [
       el('div', { className: 'top-bar-left' }, [
         iconSvg('search'),
@@ -497,6 +605,7 @@
       ]),
       el('div', { className: 'top-bar-right' }, [
         addGearButton,
+        storageStatusBadge,
         el('button', {
           className: 'icon-btn',
           'data-testid': 'notifications-btn',
@@ -572,6 +681,7 @@
 
   function bootstrap() {
     buildShell();
+    state.set('activePanel', state.get('currentView'));
 
     state.subscribe(function (currentState, path) {
       if (
@@ -583,15 +693,17 @@
       ) {
         renderView();
       }
-      // Persist every meaningful state change.
-      storage.save(currentState);
+      // Persist every meaningful state change except storage meta updates.
+      if (path !== 'storageStatus' && path !== 'lastError' && path.indexOf('activePanel') !== 0) {
+        savePersistedState();
+      }
     });
 
     renderView();
   }
 
   function init() {
-    var saved = storage.load();
+    var saved = loadPersistedState();
     if (saved && saved.items && saved.items.length) {
       state.replace(saved);
       bootstrap();
@@ -605,10 +717,13 @@
         })
         .then(function (data) {
           state.replace(data);
-          storage.save(state.getSnapshot());
+          savePersistedState();
           bootstrap();
         })
         .catch(function (err) {
+          state.set('storageStatus', 'error');
+          state.set('lastError', err && err.message ? err.message : 'Failed to seed TrailHaus data.');
+          setStorageStatusUI('Seed failed', 'error');
           // eslint-disable-next-line no-console
           if (typeof console !== 'undefined' && console.error) {
             console.error('Failed to seed TrailHaus data:', err);
@@ -623,21 +738,49 @@
     storage: storage,
     renderView: renderView,
     getMetrics: getMetrics,
-    filteredItems: filteredItems
+    filteredItems: filteredItems,
+    getSelectedItem: function () { return state.get('selectedItem'); },
+    getStorageStatus: function () { return state.get('storageStatus'); },
+    getActivePanel: function () { return state.get('activePanel'); },
+    getLastError: function () { return state.get('lastError'); }
   };
 
   // Runtime bridge required by acceptance criteria: live state + actions.
   var actions = {
-    setView: function (viewName) { state.set('currentView', viewName); },
+    setView: function (viewName) {
+      state.set('currentView', viewName);
+      state.set('activePanel', viewName);
+      state.set('selectedItem', null);
+    },
     setSearchQuery: function (query) { state.set('ui.searchQuery', query); },
     setCategory: function (category) { state.set('ui.selectedCategory', category); },
+    selectRecord: function (id) {
+      var items = state.get('items') || [];
+      var item = items.find(function (i) { return i.id === id; }) || null;
+      state.set('selectedItem', item);
+      state.set('activePanel', item ? 'item-editor' : state.get('currentView'));
+    },
     updatePreferences: function (prefs) {
       state.update('preferences', function (current) { return Object.assign({}, current, prefs); });
     },
-    saveState: function () { return storage.save(state.getSnapshot()); },
-    clearState: function () { storage.clear(); state.replace({}); }
+    saveState: function () { return savePersistedState(); },
+    clearState: function () {
+      clearPersistedState();
+      state.replace({});
+      state.set('storageStatus', 'cleared');
+    }
   };
-  window.app = { state: state, actions: actions };
+
+  window.app = {
+    state: state,
+    actions: actions,
+    get selectedItem() { return state.get('selectedItem'); },
+    get storageStatus() { return state.get('storageStatus'); },
+    get activePanel() { return state.get('activePanel'); },
+    get lastError() { return state.get('lastError'); },
+    get currentView() { return state.get('currentView'); },
+    get counts() { return getMetrics(); }
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

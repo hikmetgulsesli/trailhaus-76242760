@@ -569,6 +569,75 @@ body {
   line-height: 1.25rem;
 }
 
+.storage-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-DEFAULT, 0.125rem);
+  font-family: var(--font-label-sm, Inter), sans-serif;
+  font-size: 0.625rem;
+  line-height: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  min-height: 1.25rem;
+  color: var(--color-on-surface-variant, #434843);
+  background: transparent;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.status-info {
+  background: var(--color-surface-container-high, #e6e8ec);
+  color: var(--color-on-surface, #191c1f);
+}
+
+.status-success {
+  background: var(--color-primary-fixed, #d0e9d4);
+  color: var(--color-on-primary-fixed, #0b2013);
+}
+
+.status-warn {
+  background: var(--color-secondary-fixed, #ffdbce);
+  color: var(--color-on-secondary-fixed, #410000);
+}
+
+.status-error {
+  background: var(--color-error-container, #ffdad6);
+  color: var(--color-on-error-container, #410002);
+}
+
+.banner-storage-feedback {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-DEFAULT, 0.125rem);
+  font-family: var(--font-body-sm, Inter), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.banner-storage-info {
+  background: var(--color-surface-container-high, #e6e8ec);
+  color: var(--color-on-surface, #191c1f);
+  border: 1px solid var(--color-outline-variant, #c3c8c1);
+}
+
+.banner-storage-success {
+  background: var(--color-primary-fixed, #d0e9d4);
+  color: var(--color-on-primary-fixed, #0b2013);
+  border: 1px solid var(--color-primary-fixed-dim, #b4cdb8);
+}
+
+.banner-storage-warn {
+  background: var(--color-secondary-fixed, #ffdbce);
+  color: var(--color-on-secondary-fixed, #410000);
+  border: 1px solid var(--color-outline-variant, #c3c8c1);
+}
+
+.banner-storage-error {
+  background: var(--color-error-container, #ffdad6);
+  color: var(--color-on-error-container, #410002);
+  border: 1px solid var(--color-error, #ba1a1a);
+}
+
 /* Empty state */
 .empty-state {
   padding: 2rem;

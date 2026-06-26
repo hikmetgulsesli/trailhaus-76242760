@@ -18,6 +18,10 @@
   const DEFAULT_STATE = {
     version: '1.0.0',
     currentView: VIEWS.INVENTORY,
+    selectedItem: null,
+    storageStatus: 'unknown',
+    lastError: null,
+    activePanel: null,
     items: [],
     activities: [],
     preferences: {

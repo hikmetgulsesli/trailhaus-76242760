@@ -21,56 +21,86 @@
   }
 
   function load() {
-    if (!isStorageAvailable()) return null;
+    if (!isStorageAvailable()) {
+      return { ok: false, state: null, error: 'localStorage unavailable' };
+    }
     try {
       const raw = global.localStorage.getItem(STORAGE_KEY);
-      if (!raw) return null;
+      if (!raw) {
+        return { ok: true, state: null, recovered: false };
+      }
       const parsed = JSON.parse(raw);
       // Keep a backup on every successful load for recovery.
       global.localStorage.setItem(BACKUP_KEY, raw);
-      return parsed;
+      return { ok: true, state: parsed, recovered: false };
     } catch (err) {
-      // eslint-disable-next-line no-console
-      if (typeof console !== 'undefined' && console.warn) {
-        console.warn('TrailHaus storage load failed:', err);
+      const backup = loadBackupState();
+      if (backup.ok && backup.state) {
+        return {
+          ok: true,
+          state: backup.state,
+          recovered: true,
+          error: err && err.message ? err.message : 'Corrupted persisted JSON'
+        };
       }
-      return loadBackup();
+      return {
+        ok: false,
+        state: null,
+        recovered: false,
+        error: err && err.message ? err.message : 'Failed to load persisted state'
+      };
     }
   }
 
-  function loadBackup() {
-    if (!isStorageAvailable()) return null;
+  function loadBackupState() {
+    if (!isStorageAvailable()) {
+      return { ok: false, state: null, error: 'localStorage unavailable' };
+    }
     try {
       const raw = global.localStorage.getItem(BACKUP_KEY);
-      return raw ? JSON.parse(raw) : null;
+      if (!raw) {
+        return { ok: true, state: null, recovered: false };
+      }
+      return { ok: true, state: JSON.parse(raw), recovered: false };
     } catch (err) {
-      return null;
+      return {
+        ok: false,
+        state: null,
+        recovered: false,
+        error: err && err.message ? err.message : 'Backup load failed'
+      };
     }
   }
 
   function save(state) {
-    if (!isStorageAvailable()) return false;
+    if (!isStorageAvailable()) {
+      return { ok: false, error: 'localStorage unavailable' };
+    }
     try {
       const raw = JSON.stringify(state);
       global.localStorage.setItem(STORAGE_KEY, raw);
-      return true;
+      return { ok: true };
     } catch (err) {
-      // eslint-disable-next-line no-console
-      if (typeof console !== 'undefined' && console.warn) {
-        console.warn('TrailHaus storage save failed:', err);
-      }
-      return false;
+      return {
+        ok: false,
+        error: err && err.message ? err.message : 'Failed to save state'
+      };
     }
   }
 
   function clear() {
-    if (!isStorageAvailable()) return false;
+    if (!isStorageAvailable()) {
+      return { ok: false, error: 'localStorage unavailable' };
+    }
     try {
       global.localStorage.removeItem(STORAGE_KEY);
       global.localStorage.removeItem(BACKUP_KEY);
-      return true;
+      return { ok: true };
     } catch (err) {
-      return false;
+      return {
+        ok: false,
+        error: err && err.message ? err.message : 'Failed to clear storage'
+      };
     }
   }
 
@@ -79,7 +109,7 @@
     BACKUP_KEY: BACKUP_KEY,
     isAvailable: isStorageAvailable,
     load: load,
-    loadBackup: loadBackup,
+    loadBackup: loadBackupState,
     save: save,
     clear: clear
   };
