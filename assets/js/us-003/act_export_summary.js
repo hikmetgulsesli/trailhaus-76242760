@@ -13,19 +13,15 @@
     return app && app.state ? app.state : null;
   }
 
-  function formatDate(date) {
-    if (!date) return '';
-    var d = new Date(date);
-    return isNaN(d.getTime()) ? '' : d.toISOString();
-  }
-
   function buildSummary() {
     var state = getState();
     if (!state) return null;
 
     var items = state.get('items') || [];
     var activities = (state.get('activities') || []).slice().sort(function (a, b) {
-      return new Date(b.timestamp || 0) - new Date(a.timestamp || 0);
+      var tA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+      var tB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+      return (isNaN(tB) ? 0 : tB) - (isNaN(tA) ? 0 : tA);
     });
 
     var total = items.length;
@@ -70,6 +66,14 @@
   }
 
   function toCsv(summary) {
+    function escape(val) {
+      var str = val === null || val === undefined ? '' : String(val);
+      if (/[",\n\r]/.test(str)) {
+        return '"' + str.replace(/"/g, '""') + '"';
+      }
+      return str;
+    }
+
     var lines = [];
     lines.push(['TrailHaus Insights Summary', '', '', '', '', ''].join(','));
     lines.push(['Generated At', summary.generatedAt, '', '', '', ''].join(','));
@@ -85,13 +89,13 @@
 
     summary.items.forEach(function (item) {
       lines.push([
-        item.id,
-        '"' + String(item.name || '').replace(/"/g, '""') + '"',
-        item.sku,
-        item.category,
-        item.status,
-        item.dailyPrice,
-        item.stock
+        escape(item.id),
+        escape(item.name),
+        escape(item.sku),
+        escape(item.category),
+        escape(item.status),
+        escape(item.dailyPrice),
+        escape(item.stock)
       ].join(','));
     });
 

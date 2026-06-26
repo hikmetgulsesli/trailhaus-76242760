@@ -570,6 +570,7 @@
               if (key === 'className') node.className = attrs[key];
               else if (key === 'textContent') node.textContent = attrs[key];
               else if (key === 'innerHTML') node.innerHTML = attrs[key];
+              else if (key === 'style') node.style.cssText = attrs[key];
               else if (key.startsWith('data-')) node.setAttribute(key, attrs[key]);
               else if (key.startsWith('on') && typeof attrs[key] === 'function') {
                 node.addEventListener(key.slice(2).toLowerCase(), attrs[key]);
@@ -654,7 +655,9 @@
               (act.type && act.type.toLowerCase().indexOf(query) > -1);
             return matchesRange && matchesQuery;
           }).sort(function (a, b) {
-            return new Date(b.timestamp || 0) - new Date(a.timestamp || 0);
+            var tA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+            var tB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+            return (isNaN(tB) ? 0 : tB) - (isNaN(tA) ? 0 : tA);
           });
         }
 
