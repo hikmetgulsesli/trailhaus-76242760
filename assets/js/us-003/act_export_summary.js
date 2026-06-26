@@ -66,7 +66,7 @@
   }
 
   function toCsv(summary) {
-    function escape(val) {
+    function escapeCell(val) {
       var str = val === null || val === undefined ? '' : String(val);
       if (/[",\n\r]/.test(str)) {
         return '"' + str.replace(/"/g, '""') + '"';
@@ -74,29 +74,33 @@
       return str;
     }
 
+    function row(cells) {
+      return cells.map(escapeCell).join(',');
+    }
+
     var lines = [];
-    lines.push(['TrailHaus Insights Summary', '', '', '', '', ''].join(','));
-    lines.push(['Generated At', summary.generatedAt, '', '', '', ''].join(','));
-    lines.push(['Metric', 'Value', '', '', '', ''].join(','));
-    lines.push(['Total Items', summary.metrics.totalItems, '', '', '', ''].join(','));
-    lines.push(['Active Rentals', summary.metrics.activeRentals, '', '', '', ''].join(','));
-    lines.push(['Available Items', summary.metrics.availableItems, '', '', '', ''].join(','));
-    lines.push(['Maintenance Items', summary.metrics.maintenanceItems, '', '', '', ''].join(','));
-    lines.push(['Top Category', summary.metrics.topCategory, '', '', '', ''].join(','));
-    lines.push(['Average Daily Price', summary.metrics.averageDailyPrice, '', '', '', ''].join(','));
-    lines.push(['', '', '', '', '', ''].join(','));
-    lines.push(['ID', 'Name', 'SKU', 'Category', 'Status', 'Daily Price', 'Stock'].join(','));
+    lines.push(row(['TrailHaus Insights Summary', '', '', '', '', '']));
+    lines.push(row(['Generated At', summary.generatedAt, '', '', '', '']));
+    lines.push(row(['Metric', 'Value', '', '', '', '']));
+    lines.push(row(['Total Items', summary.metrics.totalItems, '', '', '', '']));
+    lines.push(row(['Active Rentals', summary.metrics.activeRentals, '', '', '', '']));
+    lines.push(row(['Available Items', summary.metrics.availableItems, '', '', '', '']));
+    lines.push(row(['Maintenance Items', summary.metrics.maintenanceItems, '', '', '', '']));
+    lines.push(row(['Top Category', summary.metrics.topCategory, '', '', '', '']));
+    lines.push(row(['Average Daily Price', summary.metrics.averageDailyPrice, '', '', '', '']));
+    lines.push(row(['', '', '', '', '', '']));
+    lines.push(row(['ID', 'Name', 'SKU', 'Category', 'Status', 'Daily Price', 'Stock']));
 
     summary.items.forEach(function (item) {
-      lines.push([
-        escape(item.id),
-        escape(item.name),
-        escape(item.sku),
-        escape(item.category),
-        escape(item.status),
-        escape(item.dailyPrice),
-        escape(item.stock)
-      ].join(','));
+      lines.push(row([
+        item.id,
+        item.name,
+        item.sku,
+        item.category,
+        item.status,
+        item.dailyPrice,
+        item.stock
+      ]));
     });
 
     return lines.join('\n');
