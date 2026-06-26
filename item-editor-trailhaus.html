@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Item Editor - TrailHaus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      .editor-form {
+        max-width: 40rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.5rem;
+        background: var(--color-surface, #f8f9fd);
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-lg, 0.25rem);
+      }
+      .editor-form .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .editor-form label {
+        font-family: var(--font-label-md, Inter), sans-serif;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--color-on-surface-variant, #434843);
+      }
+      .editor-form input[type="text"],
+      .editor-form input[type="number"],
+      .editor-form select,
+      .editor-form textarea {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-DEFAULT, 0.125rem);
+        background: var(--color-surface-container-low, #f2f4f7);
+        color: var(--color-on-surface, #191c1f);
+        font-family: var(--font-body-sm, Inter), sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      .editor-form input:focus,
+      .editor-form select:focus,
+      .editor-form textarea:focus {
+        outline: none;
+        border-color: var(--color-primary, #061b0e);
+        box-shadow: 0 0 0 1px var(--color-primary, #061b0e);
+      }
+      .editor-form textarea {
+        min-height: 6rem;
+        resize: vertical;
+      }
+      .radio-group {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 0.75rem !important;
+      }
+      .radio-group label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--color-outline-variant, #c3c8c1);
+        border-radius: var(--radius-DEFAULT, 0.125rem);
+        cursor: pointer;
+      }
+      .validation-banner {
+        padding: 0.75rem 1rem;
+        background: var(--color-error-container, #ffdad6);
+        color: var(--color-on-error-container, #410002);
+        border: 1px solid var(--color-error, #ba1a1a);
+        border-radius: var(--radius-DEFAULT, 0.125rem);
+      }
+      .unsaved-banner {
+        padding: 0.75rem 1rem;
+        background: var(--color-secondary-fixed, #ffdbce);
+        color: var(--color-on-secondary-fixed, #370e00);
+        border: 1px solid var(--color-secondary-fixed-dim, #ffb599);
+        border-radius: var(--radius-DEFAULT, 0.125rem);
+      }
+    </style>
+  </head>
+  <body>
+    <main data-setfarm-root="baseline" data-testid="setfarm-app-root" class="app-shell"></main>
+
+    <script src="assets/js/trailhaus.state.js" defer></script>
+    <script src="assets/js/trailhaus.storage.js" defer></script>
+    <script src="assets/js/us-002/act_save_record.js" defer></script>
+    <script src="assets/js/us-002/act_cancel_edit.js" defer></script>
+    <script src="assets/js/test-bridge.js" defer></script>
+
+    <script defer>
+      (function () {
+        'use strict';
+
+        var state = window.TrailHausState.create();
+        window.TrailHausState._instance = state;
+        var storage = window.TrailHausStorage;
+        var seedUrl = 'assets/data/trailhaus.json';
+
+        function el(tag, attrs, children) {
+          var node = document.createElement(tag);
+          if (attrs) {
+            Object.keys(attrs).forEach(function (key) {
+              if (key === 'className') node.className = attrs[key];
+              else if (key === 'textContent') node.textContent = attrs[key];
+              else if (key === 'innerHTML') node.innerHTML = attrs[key];
+              else if (key.startsWith('data-')) node.setAttribute(key, attrs[key]);
+              else if (key.startsWith('on') && typeof attrs[key] === 'function') {
+                node.addEventListener(key.slice(2).toLowerCase(), attrs[key]);
+              } else {
+                node[key] = attrs[key];
+              }
+            });
+          }
+          if (children) {
+            children.forEach(function (child) {
+              if (child === null || child === undefined) return;
+              node.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+            });
+          }
+          return node;
+        }
+
+        function iconSvg(symbol) {
+          return el('span', { className: 'icon-fallback', textContent: symbol });
+        }
+
+        function savePersistedState() {
+          var result = storage.save(state.getSnapshot());
+          if (!result.ok) {
+            state.set('storageStatus', 'error');
+            state.set('lastError', result.error || 'Failed to save state.');
+          } else {
+            state.set('storageStatus', 'saved');
+          }
+          return result.ok;
+        }
+
+        function getSelectedOrDraft() {
+          var selected = state.get('selectedItem');
+          if (selected) return selected;
+          var params = new URLSearchParams(window.location.search);
+          var id = params.get('id');
+          if (id) {
+            var items = state.get('items') || [];
+            var found = items.find(function (i) { return i.id === id; }) || null;
+            state.set('selectedItem', found);
+            state.set('ui.isNewRecord', false);
+            return found;
+          }
+          var draft = {
+            id: 'item-' + Date.now(),
+            name: '',
+            sku: '',
+            category: 'Tents',
+            status: 'Available',
+            dailyPrice: 0,
+            stock: 1,
+            description: ''
+          };
+          state.set('selectedItem', draft);
+          state.set('ui.isNewRecord', true);
+          return draft;
+        }
+
+        function renderEditor() {
+          var item = getSelectedOrDraft();
+          var validationErrors = state.get('ui.validationErrors') || [];
+          var isDirty = state.get('ui.isDirty') === true;
+
+          var nameInput = el('input', {
+            type: 'text',
+            name: 'name',
+            placeholder: 'Enter item name',
+            value: item.name,
+            required: true,
+            onInput: function () { state.set('ui.isDirty', true); }
+          });
+
+          var skuInput = el('input', {
+            type: 'text',
+            name: 'sku',
+            placeholder: 'Enter unique SKU',
+            value: item.sku,
+            required: true,
+            onInput: function () { state.set('ui.isDirty', true); }
+          });
+
+          var categorySelect = el('select', {
+            name: 'category',
+            onChange: function () { state.set('ui.isDirty', true); }
+          }, ['Tents', 'Packs', 'Apparel'].map(function (cat) {
+            return el('option', { value: cat, selected: item.category === cat, textContent: cat });
+          }));
+
+          var descriptionInput = el('textarea', {
+            name: 'description',
+            placeholder: 'Detailed technical specifications and usage guidelines...',
+            onInput: function () { state.set('ui.isDirty', true); }
+          }, [item.description || '']);
+
+          var priceInput = el('input', {
+            type: 'number',
+            name: 'dailyPrice',
+            min: 0,
+            value: item.dailyPrice,
+            onInput: function () { state.set('ui.isDirty', true); }
+          });
+
+          var stockInput = el('input', {
+            type: 'number',
+            name: 'stock',
+            min: 0,
+            value: item.stock,
+            onInput: function () { state.set('ui.isDirty', true); }
+          });
+
+          var statusGroup = el('div', { className: 'form-group radio-group' }, [
+            el('label', null, [
+              el('input', {
+                type: 'radio',
+                name: 'status',
+                value: 'Available',
+                checked: item.status === 'Available',
+                onChange: function () { state.set('ui.isDirty', true); }
+              }),
+              el('span', { textContent: 'Available' })
+            ]),
+            el('label', null, [
+              el('input', {
+                type: 'radio',
+                name: 'status',
+                value: 'Rented',
+                checked: item.status === 'Rented',
+                onChange: function () { state.set('ui.isDirty', true); }
+              }),
+              el('span', { textContent: 'Rented' })
+            ]),
+            el('label', null, [
+              el('input', {
+                type: 'radio',
+                name: 'status',
+                value: 'Maintenance',
+                checked: item.status === 'Maintenance',
+                onChange: function () { state.set('ui.isDirty', true); }
+              }),
+              el('span', { textContent: 'Maintenance' })
+            ])
+          ]);
+
+          var form = el('form', {
+            className: 'editor-form',
+            'data-testid': 'item-editor-form',
+            onSubmit: function (e) {
+              e.preventDefault();
+              var formData = {
+                id: item.id,
+                name: nameInput.value,
+                sku: skuInput.value,
+                category: categorySelect.value,
+                description: descriptionInput.value,
+                dailyPrice: parseFloat(priceInput.value),
+                stock: parseInt(stockInput.value, 10),
+                status: (form.querySelector('input[name="status"]:checked') || {}).value || 'Available'
+              };
+              var result = window.TrailHausActions.ACT_SAVE_RECORD.saveRecord(formData);
+              if (result.ok) {
+                state.set('ui.isDirty', false);
+                state.set('ui.validationErrors', []);
+                window.location.href = 'item-operations-trailhaus.html';
+              } else {
+                state.set('ui.validationErrors', result.errors);
+                render();
+              }
+            }
+          }, [
+            isDirty ? el('div', { className: 'unsaved-banner', textContent: 'Unsaved changes' }) : null,
+            validationErrors.length ? el('div', { className: 'validation-banner' }, validationErrors.map(function (err) {
+              return el('div', { textContent: err });
+            })) : null,
+            el('div', { className: 'form-group' }, [
+              el('label', { textContent: 'Item Name' }),
+              nameInput
+            ]),
+            el('div', { className: 'form-group' }, [
+              el('label', { textContent: 'SKU' }),
+              skuInput
+            ]),
+            el('div', { className: 'form-group' }, [
+              el('label', { textContent: 'Category' }),
+              categorySelect
+            ]),
+            el('div', { className: 'form-group' }, [
+              el('label', { textContent: 'Description' }),
+              descriptionInput
+            ]),
+            el('div', { className: 'form-group' }, [
+              el('label', { textContent: 'Daily Price' }),
+              priceInput
+            ]),
+            el('div', { className: 'form-group' }, [
+              el('label', { textContent: 'Stock' }),
+              stockInput
+            ]),
+            el('div', { className: 'form-group' }, [
+              el('label', { textContent: 'Status' }),
+              statusGroup
+            ]),
+            el('div', { className: 'form-actions' }, [
+              el('button', {
+                type: 'button',
+                className: 'btn btn-secondary',
+                textContent: 'Cancel',
+                'data-action-id': 'ACT_CANCEL_EDIT',
+                onClick: function () { window.TrailHausActions.ACT_CANCEL_EDIT.goBack(); }
+              }),
+              el('button', {
+                type: 'submit',
+                className: 'btn btn-primary',
+                textContent: 'Save Changes',
+                'data-action-id': 'ACT_SAVE_RECORD'
+              })
+            ])
+          ]);
+
+          return el('div', { className: 'view view-editor' }, [form]);
+        }
+
+        function render() {
+          var main = document.querySelector('[data-testid="main-content"]');
+          if (!main) return;
+          var body = main.querySelector('.content-body');
+          if (!body) return;
+          body.innerHTML = '';
+          body.appendChild(renderEditor());
+        }
+
+        function buildShell() {
+          var topBar = el('header', { className: 'top-bar' }, [
+            el('div', { className: 'top-bar-left' }, [
+              el('button', {
+                className: 'btn btn-secondary',
+                textContent: 'arrow_back',
+                'data-action-id': 'ACT_CANCEL_EDIT',
+                onClick: function () { window.TrailHausActions.ACT_CANCEL_EDIT.goBack(); }
+              })
+            ]),
+            el('div', { className: 'top-bar-right' }, [
+              el('button', { className: 'icon-btn', 'data-testid': 'notifications-btn', title: 'Notifications' }, [iconSvg('notifications')]),
+              el('button', { className: 'icon-btn', 'data-testid': 'account-btn', title: 'Account' }, [iconSvg('account_circle')]),
+              el('button', { className: 'icon-btn', 'data-testid': 'settings-btn', title: 'Settings' }, [iconSvg('settings')])
+            ])
+          ]);
+
+          var sideNav = el('nav', { className: 'side-nav' }, [
+            el('div', { className: 'brand' }, [
+              el('div', { className: 'brand-logo' }, [iconSvg('landscape')]),
+              el('div', { className: 'brand-text' }, [
+                el('h1', { textContent: 'TrailHaus' }),
+                el('p', { textContent: 'Admin Hub' })
+              ])
+            ]),
+            el('button', { className: 'btn btn-outline quick-rental', 'data-action-id': 'ACT_QUICK_RENTAL' }, [iconSvg('bolt'), el('span', { textContent: 'Quick Rental' })]),
+            el('div', { className: 'nav-scroll' }, [
+              el('ul', { className: 'nav-list' }, [
+                el('li', null, [el('a', { href: 'item-operations-trailhaus.html', className: 'nav-link active', 'data-testid': 'nav-inventory' }, [iconSvg('inventory_2'), el('span', { textContent: 'Inventory' })])]),
+                el('li', null, [el('a', { href: 'index.html?view=bookings', className: 'nav-link', 'data-testid': 'nav-bookings' }, [iconSvg('calendar_today'), el('span', { textContent: 'Bookings' })])]),
+                el('li', null, [el('a', { href: 'index.html?view=customers', className: 'nav-link', 'data-testid': 'nav-customers' }, [iconSvg('groups'), el('span', { textContent: 'Customers' })])]),
+                el('li', null, [el('a', { href: 'index.html?view=insights', className: 'nav-link', 'data-testid': 'nav-insights' }, [iconSvg('analytics'), el('span', { textContent: 'Insights' })])]),
+                el('li', null, [el('a', { href: 'index.html?view=maintenance', className: 'nav-link', 'data-testid': 'nav-maintenance' }, [iconSvg('settings_suggest'), el('span', { textContent: 'Maintenance' })])])
+              ])
+            ]),
+            el('div', { className: 'nav-bottom' }, [
+              el('ul', { className: 'nav-list' }, [
+                el('li', null, [el('a', { href: 'index.html?view=support', className: 'nav-link', 'data-testid': 'nav-support' }, [iconSvg('help'), el('span', { textContent: 'Support' })])]),
+                el('li', null, [el('a', { href: 'index.html?view=settings', className: 'nav-link', 'data-testid': 'nav-settings' }, [iconSvg('settings'), el('span', { textContent: 'settings' })])])
+              ])
+            ])
+          ]);
+
+          var main = el('main', { className: 'main-content', 'data-testid': 'main-content' }, [
+            el('h2', { className: 'content-header', textContent: 'Item Editor' }),
+            el('div', { className: 'content-body' })
+          ]);
+
+          var root = document.querySelector('[data-setfarm-root="baseline"]');
+          if (root) {
+            root.innerHTML = '';
+            root.appendChild(sideNav);
+            root.appendChild(topBar);
+            root.appendChild(main);
+          }
+        }
+
+        function bootstrap() {
+          buildShell();
+          render();
+          state.subscribe(function (currentState, path) {
+            if (path !== 'storageStatus' && path !== 'lastError') {
+              savePersistedState();
+            }
+          });
+        }
+
+        function init() {
+          state.set('currentView', 'item-editor');
+          state.set('activePanel', 'item-editor');
+          var saved = storage.load();
+          if (saved.ok && saved.state && saved.state.items && saved.state.items.length) {
+            state.replace(saved.state);
+            state.set('storageStatus', 'loaded');
+            bootstrap();
+          } else {
+            fetch(seedUrl)
+              .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error(res.statusText)); })
+              .then(function (data) {
+                state.replace(data);
+                savePersistedState();
+                bootstrap();
+              })
+              .catch(function (err) {
+                state.set('storageStatus', 'error');
+                state.set('lastError', err && err.message ? err.message : 'Failed to seed data.');
+                bootstrap();
+              });
+          }
+        }
+
+        window.TrailHausApp = {
+          state: state,
+          storage: storage,
+          render: render
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>
