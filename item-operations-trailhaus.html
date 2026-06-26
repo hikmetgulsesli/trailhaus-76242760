@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Item Operations - TrailHaus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <main data-setfarm-root="baseline" data-testid="setfarm-app-root" class="app-shell"></main>
+
+    <script src="assets/js/trailhaus.state.js" defer></script>
+    <script src="assets/js/trailhaus.storage.js" defer></script>
+    <script src="assets/js/us-002/act_search_records.js" defer></script>
+    <script src="assets/js/us-002/act_create_record.js" defer></script>
+    <script src="assets/js/us-002/act_select_record.js" defer></script>
+    <script src="assets/js/us-002/act_retry_load.js" defer></script>
+    <script src="assets/js/test-bridge.js" defer></script>
+
+    <script defer>
+      (function () {
+        'use strict';
+
+        var VIEWS = window.TrailHausState.VIEWS;
+        var state = window.TrailHausState.create();
+        window.TrailHausState._instance = state;
+        var storage = window.TrailHausStorage;
+        var seedUrl = 'assets/data/trailhaus.json';
+
+        function el(tag, attrs, children) {
+          var node = document.createElement(tag);
+          if (attrs) {
+            Object.keys(attrs).forEach(function (key) {
+              if (key === 'className') node.className = attrs[key];
+              else if (key === 'textContent') node.textContent = attrs[key];
+              else if (key === 'innerHTML') node.innerHTML = attrs[key];
+              else if (key.startsWith('data-')) node.setAttribute(key, attrs[key]);
+              else if (key.startsWith('on') && typeof attrs[key] === 'function') {
+                node.addEventListener(key.slice(2).toLowerCase(), attrs[key]);
+              } else {
+                node[key] = attrs[key];
+              }
+            });
+          }
+          if (children) {
+            children.forEach(function (child) {
+              if (child === null || child === undefined) return;
+              node.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+            });
+          }
+          return node;
+        }
+
+        function iconSvg(symbol) {
+          return el('span', { className: 'icon-fallback', textContent: symbol });
+        }
+
+        function getMetrics() {
+          var items = state.get('items') || [];
+          return {
+            total: items.length,
+            active: items.filter(function (i) { return i.status === 'Rented'; }).length,
+            maintenance: items.filter(function (i) { return i.status === 'Maintenance'; }).length,
+            available: items.filter(function (i) { return i.status === 'Available'; }).length
+          };
+        }
+
+        function filteredItems() {
+          var items = state.get('items') || [];
+          var query = (state.get('ui.searchQuery') || '').toLowerCase();
+          var category = state.get('ui.selectedCategory') || 'All Items';
+          return items.filter(function (item) {
+            var matchesCategory = category === 'All Items' || item.category === category;
+            var matchesQuery = !query ||
+              item.name.toLowerCase().indexOf(query) > -1 ||
+              item.sku.toLowerCase().indexOf(query) > -1;
+            return matchesCategory && matchesQuery;
+          });
+        }
+
+        function uniqueCategories() {
+          var items = state.get('items') || [];
+          var cats = {};
+          items.forEach(function (item) { cats[item.category] = true; });
+          return ['All Items'].concat(Object.keys(cats).sort());
+        }
+
+        function setStorageStatusUI(message, type) {
+          var badge = document.querySelector('[data-testid="storage-status"]');
+          if (!badge) return;
+          badge.textContent = message || '';
+          badge.className = 'storage-status' + (type ? ' status-' + type : '');
+        }
+
+        function savePersistedState() {
+          var result = storage.save(state.getSnapshot());
+          if (!result.ok) {
+            state.set('storageStatus', 'error');
+            state.set('lastError', result.error || 'Failed to save state.');
+            setStorageStatusUI('Save failed', 'error');
+            return false;
+          }
+          state.set('storageStatus', 'saved');
+          setStorageStatusUI('Saved', 'success');
+          return true;
+        }
+
+        function renderErrorState() {
+          var lastError = state.get('lastError') || state.get('ui.errorMessage') || 'Data unavailable.';
+          return el('div', { className: 'empty-state' }, [
+            el('p', { textContent: lastError }),
+            el('button', {
+              className: 'btn btn-secondary',
+              textContent: 'Retry Load',
+              'data-action-id': 'ACT_RETRY_LOAD',
+              onClick: function () {
+                window.TrailHausActions.ACT_RETRY_LOAD.retryLoad().then(function () { render(); });
+              }
+            })
+          ]);
+        }
+
+        function renderMetrics() {
+          var metrics = getMetrics();
+          function card(label, value, tone) {
+            return el('div', { className: 'metric-card ' + (tone || '') }, [
+              el('span', { className: 'metric-label', textContent: label }),
+              el('span', { className: 'metric-value', textContent: value })
+            ]);
+          }
+          return el('div', { className: 'metrics-grid' }, [
+            card('Total Items', metrics.total),
+            card('Available', metrics.available, 'good'),
+            card('Active Rentals', metrics.active, 'accent'),
+            card('Maintenance', metrics.maintenance, 'warn')
+          ]);
+        }
+
+        function renderFilters() {
+          var categories = uniqueCategories();
+          var buttons = categories.map(function (cat) {
+            return el('button', {
+              className: 'btn btn-secondary' + (state.get('ui.selectedCategory') === cat ? ' active' : ''),
+              textContent: cat,
+              'data-action-id': cat === 'All Items' ? 'ACT_SEARCH_RECORDS' : 'ACT_FILTER_CATEGORY',
+              onClick: function () {
+                window.TrailHausActions.ACT_SEARCH_RECORDS.setCategory(cat);
+              }
+            });
+          });
+
+          return el('div', { className: 'toolbar' }, [
+            el('input', {
+              type: 'text',
+              className: 'search-input',
+              placeholder: 'Search inventory...',
+              value: state.get('ui.searchQuery') || '',
+              'data-testid': 'search-inventory',
+              'data-action-id': 'ACT_SEARCH_RECORDS',
+              onInput: function (e) {
+                window.TrailHausActions.ACT_SEARCH_RECORDS.handleInput(e);
+              }
+            }),
+            el('button', {
+              className: 'btn btn-secondary',
+              textContent: 'Filter Settings',
+              'data-action-id': 'ACT_FILTER_SETTINGS',
+              onClick: function () {
+                var cat = window.prompt('Filter by category (All Items/Tents/Packs/Apparel):', state.get('ui.selectedCategory'));
+                if (cat) window.TrailHausActions.ACT_SEARCH_RECORDS.setCategory(cat);
+              }
+            })
+          ].concat(buttons));
+        }
+
+        function renderTable() {
+          var items = filteredItems();
+          var header = el('div', { className: 'item-row item-header' }, [
+            el('span', null, [el('input', { type: 'checkbox', disabled: true })]),
+            el('span', { textContent: 'Name' }),
+            el('span', { textContent: 'SKU' }),
+            el('span', { textContent: 'Category' }),
+            el('span', { textContent: 'Status' }),
+            el('span', { textContent: 'Price/Day' }),
+            el('span', { textContent: 'Stock' }),
+            el('span', { textContent: 'Actions' })
+          ]);
+
+          var rows = items.map(function (item) {
+            var statusClass = 'status-' + item.status.toLowerCase();
+            return el('div', { className: 'item-row' }, [
+              el('span', null, [el('input', { type: 'checkbox', 'data-testid': 'select-' + item.id })]),
+              el('span', { textContent: item.name }),
+              el('span', { className: 'sku', textContent: item.sku }),
+              el('span', { textContent: item.category }),
+              el('span', { className: 'status-badge ' + statusClass, textContent: item.status }),
+              el('span', { textContent: '$' + item.dailyPrice }),
+              el('span', { textContent: item.stock }),
+              el('button', {
+                className: 'btn btn-secondary btn-small',
+                textContent: 'Edit',
+                'data-action-id': 'ACT_SELECT_RECORD',
+                'data-record-id': item.id,
+                onClick: function () {
+                  window.TrailHausActions.ACT_SELECT_RECORD.openEditor(item.id);
+                }
+              })
+            ]);
+          });
+
+          var table = el('div', { className: 'item-list' }, [header].concat(rows));
+          return items.length === 0
+            ? el('p', { className: 'empty-state', textContent: 'No items match the current filter.' })
+            : table;
+        }
+
+        function renderPagination() {
+          return el('div', { className: 'toolbar' }, [
+            el('button', { className: 'btn btn-secondary', textContent: 'Prev', 'data-action-id': 'ACT_PREV_PAGE' }, []),
+            el('button', { className: 'btn btn-secondary', textContent: 'Next', 'data-action-id': 'ACT_NEXT_PAGE' }, [])
+          ]);
+        }
+
+        function renderInventory() {
+          if (state.get('storageStatus') === 'error' && (state.get('items') || []).length === 0) {
+            return renderErrorState();
+          }
+          return el('div', { className: 'view view-inventory' }, [
+            renderMetrics(),
+            renderFilters(),
+            renderTable(),
+            renderPagination()
+          ]);
+        }
+
+        function render() {
+          var main = document.querySelector('[data-testid="main-content"]');
+          if (!main) return;
+          var body = main.querySelector('.content-body');
+          if (!body) return;
+          body.innerHTML = '';
+          body.appendChild(renderInventory());
+        }
+
+        function buildNavItem(view, label, href) {
+          return el('a', {
+            href: href || '#',
+            className: 'nav-link' + (view === 'inventory' ? ' active' : ''),
+            'data-testid': 'nav-' + view,
+            onClick: function (e) {
+              if (!href || href === '#') e.preventDefault();
+            }
+          }, [iconSvg(view), el('span', { textContent: label })]);
+        }
+
+        function buildShell() {
+          var topBar = el('header', { className: 'top-bar' }, [
+            el('div', { className: 'top-bar-left' }, [
+              iconSvg('search'),
+              el('input', {
+                type: 'text',
+                className: 'top-search',
+                placeholder: 'Search...',
+                'data-testid': 'top-search',
+                onInput: function (e) {
+                  window.TrailHausActions.ACT_SEARCH_RECORDS.handleInput(e);
+                }
+              })
+            ]),
+            el('div', { className: 'top-bar-right' }, [
+              el('button', {
+                className: 'btn btn-primary',
+                textContent: 'Add Gear',
+                'data-action-id': 'ACT_CREATE_RECORD',
+                onClick: function () { window.TrailHausActions.ACT_CREATE_RECORD.openEditor(); }
+              }),
+              el('span', { className: 'storage-status', 'data-testid': 'storage-status' }),
+              el('button', { className: 'icon-btn', 'data-testid': 'notifications-btn', title: 'Notifications' }, [iconSvg('notifications')]),
+              el('button', { className: 'icon-btn', 'data-testid': 'account-btn', title: 'Account' }, [iconSvg('account_circle')]),
+              el('button', { className: 'icon-btn', 'data-testid': 'settings-btn', title: 'Settings' }, [iconSvg('settings')])
+            ])
+          ]);
+
+          var sideNav = el('nav', { className: 'side-nav' }, [
+            el('div', { className: 'brand' }, [
+              el('div', { className: 'brand-logo' }, [iconSvg('landscape')]),
+              el('div', { className: 'brand-text' }, [
+                el('h1', { textContent: 'TrailHaus' }),
+                el('p', { textContent: 'Admin Hub' })
+              ])
+            ]),
+            el('button', { className: 'btn btn-outline quick-rental', 'data-action-id': 'ACT_QUICK_RENTAL' }, [iconSvg('bolt'), el('span', { textContent: 'Quick Rental' })]),
+            el('div', { className: 'nav-scroll' }, [
+              el('ul', { className: 'nav-list' }, [
+                el('li', null, [buildNavItem('inventory', 'Inventory', 'item-operations-trailhaus.html')]),
+                el('li', null, [buildNavItem('bookings', 'Bookings', 'index.html?view=bookings')]),
+                el('li', null, [buildNavItem('customers', 'Customers', 'index.html?view=customers')]),
+                el('li', null, [buildNavItem('insights', 'Insights', 'index.html?view=insights')]),
+                el('li', null, [buildNavItem('maintenance', 'Maintenance', 'index.html?view=maintenance')])
+              ])
+            ]),
+            el('div', { className: 'nav-bottom' }, [
+              el('ul', { className: 'nav-list' }, [
+                el('li', null, [buildNavItem('support', 'Support', 'index.html?view=support')]),
+                el('li', null, [buildNavItem('settings', 'settings', 'index.html?view=settings')])
+              ])
+            ])
+          ]);
+
+          var main = el('main', { className: 'main-content', 'data-testid': 'main-content' }, [
+            el('h2', { className: 'content-header', textContent: 'Item Operations' }),
+            el('div', { className: 'content-body' })
+          ]);
+
+          var root = document.querySelector('[data-setfarm-root="baseline"]');
+          if (root) {
+            root.innerHTML = '';
+            root.appendChild(sideNav);
+            root.appendChild(topBar);
+            root.appendChild(main);
+          }
+        }
+
+        function bootstrap() {
+          buildShell();
+          state.subscribe(function (currentState, path) {
+            if (path === '*' || path.indexOf('items') === 0 || path.indexOf('ui') === 0) {
+              render();
+            }
+            if (path !== 'storageStatus' && path !== 'lastError' && path.indexOf('activePanel') !== 0) {
+              savePersistedState();
+            }
+          });
+          render();
+        }
+
+        function init() {
+          state.set('currentView', VIEWS.INVENTORY);
+          state.set('activePanel', 'inventory');
+          var saved = storage.load();
+          if (saved.ok && saved.state && saved.state.items && saved.state.items.length) {
+            state.replace(saved.state);
+            state.set('storageStatus', 'loaded');
+            bootstrap();
+          } else {
+            fetch(seedUrl)
+              .then(function (res) { return res.ok ? res.json() : Promise.reject(new Error(res.statusText)); })
+              .then(function (data) {
+                state.replace(data);
+                savePersistedState();
+                bootstrap();
+              })
+              .catch(function (err) {
+                state.set('storageStatus', 'error');
+                state.set('lastError', err && err.message ? err.message : 'Failed to seed data.');
+                bootstrap();
+              });
+          }
+        }
+
+        window.TrailHausApp = {
+          state: state,
+          storage: storage,
+          render: render,
+          getMetrics: getMetrics,
+          filteredItems: filteredItems
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>
