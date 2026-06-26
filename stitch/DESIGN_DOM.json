@@ -1,0 +1,2642 @@
+{
+  "generatedAt": "2026-06-26T09:03:49.546Z",
+  "screenCount": 4,
+  "screens": {
+    "2ec34fad2a03488d83583de6f30600c3": {
+      "screenId": "2ec34fad2a03488d83583de6f30600c3",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-col",
+          "classes": [
+            "hidden",
+            "md:flex",
+            "flex-col",
+            "h-screen",
+            "fixed",
+            "left-0",
+            "top-0",
+            "py-6",
+            "px-4",
+            "bg-surface"
+          ],
+          "childCount": 9
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "flex-grow",
+            "flex",
+            "flex-col",
+            "md:ml-64",
+            "w-full",
+            "h-full",
+            "overflow-y-auto",
+            "bg-surface-bright"
+          ],
+          "childCount": 28
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "classes": [
+            "mb-6",
+            "w-full",
+            "py-3",
+            "bg-secondary",
+            "text-on-secondary",
+            "rounded",
+            "font-label-md",
+            "text-label-md",
+            "hover:brightness-95",
+            "transition-all"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Gear",
+          "classes": [
+            "hidden",
+            "md:flex",
+            "font-label-md",
+            "text-label-md",
+            "text-primary",
+            "font-bold",
+            "hover:text-secondary",
+            "transition-colors",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Notifications",
+          "classes": [
+            "font-label-md",
+            "text-label-md",
+            "text-on-surface-variant",
+            "hover:text-secondary",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "account_circle",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-secondary",
+            "transition-colors"
+          ],
+          "icon": "account_circle",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "settings",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-secondary",
+            "transition-colors"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#",
+          "expectedRoute": "#"
+        },
+        {
+          "kind": "button",
+          "label": "Grid",
+          "classes": [
+            "px-4",
+            "py-1.5",
+            "rounded",
+            "bg-surface-container-lowest",
+            "shadow-sm",
+            "border",
+            "border-outline-variant",
+            "text-primary",
+            "font-label-md",
+            "text-label-md",
+            "flex",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "grid_view",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Table",
+          "classes": [
+            "px-4",
+            "py-1.5",
+            "rounded",
+            "text-on-surface-variant",
+            "hover:bg-surface-container-highest",
+            "transition-colors",
+            "font-label-md",
+            "text-label-md",
+            "flex",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "table_rows",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Balanced",
+          "classes": [
+            "px-4",
+            "py-1.5",
+            "rounded",
+            "text-on-surface-variant",
+            "hover:bg-surface-container-highest",
+            "transition-colors",
+            "font-label-md",
+            "text-label-md",
+            "flex",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "density_medium",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Compact",
+          "classes": [
+            "px-4",
+            "py-1.5",
+            "rounded",
+            "bg-surface-container-lowest",
+            "shadow-sm",
+            "border",
+            "border-outline-variant",
+            "text-primary",
+            "font-label-md",
+            "text-label-md",
+            "flex",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "density_small",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Manage All",
+          "classes": [
+            "font-label-md",
+            "text-label-md",
+            "text-secondary",
+            "hover:underline"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search...",
+          "placeholder": "Search...",
+          "name": "",
+          "classes": [
+            "w-full",
+            "pl-10",
+            "pr-4",
+            "py-2",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded",
+            "focus:border-secondary",
+            "focus:ring-1",
+            "focus:ring-secondary",
+            "focus:outline-none",
+            "font-body-sm",
+            "text-body-sm",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "checkbox",
+          "label": "checkbox",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "sr-only",
+            "peer"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "inventory_2",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "calendar_today",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "groups",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "analytics",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "settings_suggest",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "calendar_today",
+        "groups",
+        "analytics",
+        "settings_suggest",
+        "help",
+        "settings",
+        "search",
+        "add",
+        "account_circle",
+        "tune",
+        "grid_view",
+        "table_rows",
+        "density_medium",
+        "density_small",
+        "filter_list",
+        "warning",
+        "chevron_right",
+        "event",
+        "notifications"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCmkORmava6YfRlUYTbE7j_PNmsQZL5ksMivpbeoJQr5nZl0ICo2TxMzXH6wSz9wkjyTEOmMiRdhwENlnagUyxLvue_AWd3lkjXKYIBuLAAUQT2TV7b0GYViK4udE9lVhSvXG-TFoAuGj20nqAK6z",
+          "alt": "User profile photo"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-tertiary-fixed": "#261911",
+        "on-error-container": "#93000a",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#c3c8c1",
+        "on-tertiary-fixed-variant": "#54433a",
+        "primary-fixed-dim": "#b4cdb8",
+        "on-error": "#ffffff",
+        "secondary-fixed-dim": "#ffb599",
+        "surface-variant": "#e1e2e6",
+        "primary-container": "#1b3022",
+        "outline": "#737973",
+        "on-background": "#191c1f",
+        "on-surface": "#191c1f",
+        "on-primary": "#ffffff",
+        "on-secondary-fixed": "#370e00",
+        "tertiary": "#21140c",
+        "surface-bright": "#f8f9fd",
+        "inverse-on-surface": "#eff1f4",
+        "on-primary-container": "#819986",
+        "tertiary-fixed-dim": "#dac2b5",
+        "surface-container-high": "#e6e8ec",
+        "error": "#ba1a1a",
+        "on-tertiary": "#ffffff",
+        "inverse-primary": "#b4cdb8",
+        "surface-tint": "#4d6453",
+        "surface-dim": "#d8dade",
+        "secondary-fixed": "#ffdbce",
+        "on-secondary": "#ffffff",
+        "tertiary-fixed": "#f7ddd0",
+        "on-secondary-fixed-variant": "#7f2b00",
+        "secondary": "#a63b00",
+        "surface-container-highest": "#e1e2e6",
+        "primary-fixed": "#d0e9d4",
+        "background": "#f8f9fd",
+        "surface-container-low": "#f2f4f7",
+        "on-surface-variant": "#434843",
+        "on-tertiary-container": "#a48e83",
+        "on-primary-fixed-variant": "#364c3c",
+        "secondary-container": "#fe5f00",
+        "on-primary-fixed": "#0b2013",
+        "error-container": "#ffdad6",
+        "tertiary-container": "#372820",
+        "inverse-surface": "#2e3134",
+        "primary": "#061b0e",
+        "surface-container": "#eceef1",
+        "on-secondary-container": "#521900",
+        "surface": "#f8f9fd"
+      },
+      "fonts": [
+        "Inter",
+        "Archivo Narrow",
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col",
+        "gap": "3"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "icon": "inventory_2",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "icon": "calendar_today",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "icon": "groups",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "icon": "settings_suggest",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "icon": "help",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Gear",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Notifications",
+          "icon": null,
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "account_circle",
+          "icon": "account_circle",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "settings",
+          "icon": "settings",
+          "action": "navigate",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Grid",
+          "icon": "grid_view",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Table",
+          "icon": "table_rows",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Balanced",
+          "icon": "density_medium",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Compact",
+          "icon": "density_small",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Manage All",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search...",
+          "type": "text",
+          "placeholder": "Search...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "checkbox",
+          "type": "checkbox",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "icon": null,
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "icon": "inventory_2",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "icon": "calendar_today",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "icon": "groups",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "icon": "settings_suggest",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "icon": "help",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": true
+        }
+      ],
+      "title": "Settings and Preferences - TrailHaus"
+    },
+    "5c341a4f87b34531b346ff0c5abd3c7c": {
+      "screenId": "5c341a4f87b34531b346ff0c5abd3c7c",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-col",
+          "classes": [
+            "hidden",
+            "md:flex",
+            "flex-col",
+            "h-screen",
+            "fixed",
+            "left-0",
+            "top-0",
+            "py-6",
+            "px-4",
+            "bg-surface"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "header",
+          "layout": "flex-row",
+          "classes": [
+            "flex",
+            "justify-between",
+            "items-center",
+            "h-16",
+            "px-8",
+            "sticky",
+            "top-0",
+            "z-50",
+            "bg-surface/80",
+            "dark:bg-surface-dim/80"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "main",
+          "layout": "flex-row",
+          "classes": [
+            "flex-1",
+            "p-margin-mobile",
+            "md:p-margin-desktop",
+            "overflow-y-auto"
+          ],
+          "childCount": 48
+        },
+        {
+          "tag": "footer",
+          "layout": "flex-row",
+          "classes": [
+            "bg-surface-container-low",
+            "dark:bg-surface-container-lowest",
+            "flex",
+            "justify-between",
+            "items-center",
+            "py-3",
+            "px-8",
+            "border-t",
+            "border-outline-variant",
+            "dark:border-outline"
+          ],
+          "childCount": 1
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "classes": [
+            "w-full",
+            "bg-secondary",
+            "hover:bg-[#852f00]",
+            "text-on-secondary",
+            "font-label-md",
+            "text-label-md",
+            "py-3",
+            "px-4",
+            "rounded-DEFAULT",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-2",
+            "mb-8",
+            "transition-colors",
+            "shadow-[0_2px_4px_rgba(0,0,0,0.05)]",
+            "border",
+            "border-transparent"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Add Gear",
+          "classes": [
+            "hidden",
+            "sm:block",
+            "px-4",
+            "py-1.5",
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "hover:bg-surface-container-high",
+            "font-label-md",
+            "text-label-md",
+            "rounded-DEFAULT",
+            "transition-colors",
+            "bg-surface-container-lowest",
+            "shadow-[0_2px_4px_rgba(0,0,0,0.05)]"
+          ],
+          "icon": null,
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-secondary",
+            "transition-colors",
+            "relative"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "account_circle",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-secondary",
+            "transition-colors"
+          ],
+          "icon": "account_circle",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "settings",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-secondary",
+            "transition-colors"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#",
+          "expectedRoute": "#"
+        },
+        {
+          "kind": "button",
+          "label": "Filter",
+          "classes": [
+            "px-4",
+            "py-2",
+            "border",
+            "border-outline-variant",
+            "bg-surface-container-lowest",
+            "text-on-surface",
+            "font-label-md",
+            "text-label-md",
+            "rounded-DEFAULT",
+            "hover:bg-surface-container-low",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-2",
+            "shadow-[0_2px_4px_rgba(0,0,0,0.05)]"
+          ],
+          "icon": "filter_list",
+          "action": "search",
+          "expectedBehavior": "filter/search visible results from input/query"
+        },
+        {
+          "kind": "button",
+          "label": "Export Summary",
+          "classes": [
+            "px-4",
+            "py-2",
+            "border",
+            "border-outline-variant",
+            "bg-surface-container-lowest",
+            "text-on-surface",
+            "font-label-md",
+            "text-label-md",
+            "rounded-DEFAULT",
+            "hover:bg-surface-container-low",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-2",
+            "shadow-[0_2px_4px_rgba(0,0,0,0.05)]"
+          ],
+          "icon": "download",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Review Items",
+          "classes": [
+            "font-label-md",
+            "text-label-md",
+            "text-error",
+            "hover:underline",
+            "shrink-0"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "View All",
+          "classes": [
+            "font-label-sm",
+            "text-label-sm",
+            "text-on-surface-variant",
+            "hover:text-primary",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-1"
+          ],
+          "icon": "arrow_forward",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search insights...",
+          "placeholder": "Search insights...",
+          "name": "",
+          "classes": [
+            "pl-10",
+            "pr-4",
+            "py-1.5",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-[#4d6453]",
+            "focus:ring-1",
+            "focus:ring-[#4d6453]",
+            "transition-all",
+            "w-64",
+            "placeholder:text-outline",
+            "shadow-[0_2px_4px_rgba(0,0,0,0.05)]"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "inventory_2",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "calendar_today",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "groups",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "analytics",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "settings_suggest",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "System Status: Operational",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface-variant",
+            "hover:text-primary",
+            "underline",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Help Center",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface-variant",
+            "hover:text-primary",
+            "underline",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Privacy Policy",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface-variant",
+            "hover:text-primary",
+            "underline",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "add",
+        "calendar_today",
+        "groups",
+        "analytics",
+        "settings_suggest",
+        "help",
+        "settings",
+        "search",
+        "notifications",
+        "account_circle",
+        "filter_list",
+        "download",
+        "warning",
+        "timer",
+        "trending_up",
+        "terrain",
+        "arrow_forward",
+        "check_circle",
+        "report",
+        "shopping_cart",
+        "local_shipping",
+        "inventory"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuAVNsP5A27hl6Xs2hLTVPG4LP---crW1VOOYml8n_RMX2gqn_7NDjAZIg3PjTaSWOYEzel_9dPkKc8YH-cHThB9e6kb5T6BIHnusKI3garrJL1K8Eq_k7qXfqblKus-mal10Hv0BMDggE2hEl2cmy",
+          "alt": "User profile photo"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-tertiary-fixed": "#261911",
+        "on-error-container": "#93000a",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#c3c8c1",
+        "on-tertiary-fixed-variant": "#54433a",
+        "primary-fixed-dim": "#b4cdb8",
+        "on-error": "#ffffff",
+        "secondary-fixed-dim": "#ffb599",
+        "surface-variant": "#e1e2e6",
+        "primary-container": "#1b3022",
+        "outline": "#737973",
+        "on-background": "#191c1f",
+        "on-surface": "#191c1f",
+        "on-primary": "#ffffff",
+        "on-secondary-fixed": "#370e00",
+        "tertiary": "#21140c",
+        "surface-bright": "#f8f9fd",
+        "inverse-on-surface": "#eff1f4",
+        "on-primary-container": "#819986",
+        "tertiary-fixed-dim": "#dac2b5",
+        "surface-container-high": "#e6e8ec",
+        "error": "#ba1a1a",
+        "on-tertiary": "#ffffff",
+        "inverse-primary": "#b4cdb8",
+        "surface-tint": "#4d6453",
+        "surface-dim": "#d8dade",
+        "secondary-fixed": "#ffdbce",
+        "on-secondary": "#ffffff",
+        "tertiary-fixed": "#f7ddd0",
+        "on-secondary-fixed-variant": "#7f2b00",
+        "secondary": "#a63b00",
+        "surface-container-highest": "#e1e2e6",
+        "primary-fixed": "#d0e9d4",
+        "background": "#f8f9fd",
+        "surface-container-low": "#f2f4f7",
+        "on-surface-variant": "#434843",
+        "on-tertiary-container": "#a48e83",
+        "on-primary-fixed-variant": "#364c3c",
+        "secondary-container": "#fe5f00",
+        "on-primary-fixed": "#0b2013",
+        "error-container": "#ffdad6",
+        "tertiary-container": "#372820",
+        "inverse-surface": "#2e3134",
+        "primary": "#061b0e",
+        "surface-container": "#eceef1",
+        "on-secondary-container": "#521900",
+        "surface": "#f8f9fd"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Archivo Narrow",
+        "Inter"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col",
+        "gap": "3"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "icon": "inventory_2",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "icon": "calendar_today",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "icon": "groups",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "icon": "settings_suggest",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "icon": "help",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "System Status: Operational",
+          "icon": null,
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Help Center",
+          "icon": null,
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Privacy Policy",
+          "icon": null,
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Add Gear",
+          "icon": null,
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "account_circle",
+          "icon": "account_circle",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "settings",
+          "icon": "settings",
+          "action": "navigate",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Filter",
+          "icon": "filter_list",
+          "action": "search",
+          "expectedBehavior": "filter/search visible results from input/query"
+        },
+        {
+          "kind": "button",
+          "label": "Export Summary",
+          "icon": "download",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Review Items",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "View All",
+          "icon": "arrow_forward",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search insights...",
+          "type": "text",
+          "placeholder": "Search insights...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "icon": "add",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "icon": "inventory_2",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "icon": "calendar_today",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "icon": "groups",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "icon": "settings_suggest",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "icon": "help",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "System Status: Operational",
+          "icon": null,
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Help Center",
+          "icon": null,
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Privacy Policy",
+          "icon": null,
+          "route": "#",
+          "active": true
+        }
+      ],
+      "title": "Insights - TrailHaus"
+    },
+    "6c611827e5be4164abd4b1df3e19cfc3": {
+      "screenId": "6c611827e5be4164abd4b1df3e19cfc3",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "header",
+          "layout": "block",
+          "classes": [
+            "bg-surface-container-lowest/80",
+            "backdrop-blur-md",
+            "border-b",
+            "border-outline-variant",
+            "sticky",
+            "top-0",
+            "z-50",
+            "shadow-[0px_2px_4px_rgba(0,0,0,0.05)]"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "main",
+          "layout": "flex-row",
+          "classes": [
+            "flex-grow",
+            "max-w-[1440px]",
+            "w-full",
+            "mx-auto",
+            "px-margin-mobile",
+            "md:px-margin-desktop",
+            "py-lg",
+            "pb-xl"
+          ],
+          "childCount": 26
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "arrow_back",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-primary",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center",
+            "p-xs",
+            "rounded",
+            "hover:bg-surface-container"
+          ],
+          "icon": "arrow_back",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Cancel",
+          "classes": [
+            "px-4",
+            "py-2",
+            "font-label-md",
+            "text-label-md",
+            "border",
+            "border-[#D1D5DB]",
+            "rounded",
+            "text-on-surface",
+            "hover:bg-surface-container",
+            "transition-colors",
+            "bg-surface-container-lowest"
+          ],
+          "icon": null,
+          "action": "dismiss",
+          "expectedBehavior": "close dialog/panel or return to previous state"
+        },
+        {
+          "kind": "button",
+          "label": "Changes",
+          "classes": [
+            "px-4",
+            "py-2",
+            "font-label-md",
+            "text-label-md",
+            "bg-secondary",
+            "text-white",
+            "rounded",
+            "hover:bg-secondary-container",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "save",
+          "action": "form-submit",
+          "expectedBehavior": "validate inputs and submit/apply changes"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Enter item name",
+          "placeholder": "Enter item name",
+          "name": "itemName",
+          "classes": [
+            "tech-input"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Enter unique SKU",
+          "placeholder": "Enter unique SKU",
+          "name": "itemSku",
+          "classes": [
+            "tech-input",
+            "tech-input-error",
+            "pr-10"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "select",
+          "label": "itemCategory",
+          "placeholder": "",
+          "name": "itemCategory",
+          "classes": [
+            "tech-input",
+            "appearance-none"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "textarea",
+          "label": "Detailed technical specifications and usage guidelines...",
+          "placeholder": "Detailed technical specifications and usage guidelines...",
+          "name": "itemDescription",
+          "classes": [
+            "tech-input",
+            "resize-y"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "number",
+          "label": "rentalPrice",
+          "placeholder": "",
+          "name": "rentalPrice",
+          "classes": [
+            "tech-input",
+            "pl-8"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "radio",
+          "label": "status",
+          "placeholder": "",
+          "name": "status",
+          "classes": [
+            "text-secondary",
+            "focus:ring-secondary",
+            "border-[#D1D5DB]"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [],
+      "cards": [],
+      "icons": [
+        "arrow_back",
+        "save",
+        "error",
+        "warning",
+        "arrow_drop_down",
+        "payments",
+        "cloud_upload",
+        "delete"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCetqCFMaHjYDxUuZA_xJDJWt5tvOMQmKOKa-R9N16PaV2keO2wSy5TzLtbt_ha4A8qoOH4ThVfJ6kvBV7YYu-5TTr3hDhrB-pYbrOPABsaQEMC5fizUjq9UfALAGWl0L1rE1DuHnr79dctlYsn9i",
+          "alt": "A high-quality, evenly lit product photograph of a titanium climbing axe against a pure white background. The image is crisp and detailed, showing the metallic texture of the axe head and the rubberized grip on the handle. The lighting is studio-style, minimizing shadows and emphasizing the technical nature of the climbing gear. Modern, clean aesthetic suitable for an e-commerce platform."
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-tertiary-fixed": "#261911",
+        "on-error-container": "#93000a",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#c3c8c1",
+        "on-tertiary-fixed-variant": "#54433a",
+        "primary-fixed-dim": "#b4cdb8",
+        "on-error": "#ffffff",
+        "secondary-fixed-dim": "#ffb599",
+        "surface-variant": "#e1e2e6",
+        "primary-container": "#1b3022",
+        "outline": "#737973",
+        "on-background": "#191c1f",
+        "on-surface": "#191c1f",
+        "on-primary": "#ffffff",
+        "on-secondary-fixed": "#370e00",
+        "tertiary": "#21140c",
+        "surface-bright": "#f8f9fd",
+        "inverse-on-surface": "#eff1f4",
+        "on-primary-container": "#819986",
+        "tertiary-fixed-dim": "#dac2b5",
+        "surface-container-high": "#e6e8ec",
+        "error": "#ba1a1a",
+        "on-tertiary": "#ffffff",
+        "inverse-primary": "#b4cdb8",
+        "surface-tint": "#4d6453",
+        "surface-dim": "#d8dade",
+        "secondary-fixed": "#ffdbce",
+        "on-secondary": "#ffffff",
+        "tertiary-fixed": "#f7ddd0",
+        "on-secondary-fixed-variant": "#7f2b00",
+        "secondary": "#a63b00",
+        "surface-container-highest": "#e1e2e6",
+        "primary-fixed": "#d0e9d4",
+        "background": "#f8f9fd",
+        "surface-container-low": "#f2f4f7",
+        "on-surface-variant": "#434843",
+        "on-tertiary-container": "#a48e83",
+        "on-primary-fixed-variant": "#364c3c",
+        "secondary-container": "#fe5f00",
+        "on-primary-fixed": "#0b2013",
+        "error-container": "#ffdad6",
+        "tertiary-container": "#372820",
+        "inverse-surface": "#2e3134",
+        "primary": "#061b0e",
+        "surface-container": "#eceef1",
+        "on-secondary-container": "#521900",
+        "surface": "#f8f9fd"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Archivo Narrow",
+        "Inter"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col",
+        "gap": "2"
+      },
+      "behaviorContract": [
+        {
+          "kind": "button",
+          "label": "arrow_back",
+          "icon": "arrow_back",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Cancel",
+          "icon": null,
+          "action": "dismiss",
+          "expectedBehavior": "close dialog/panel or return to previous state"
+        },
+        {
+          "kind": "button",
+          "label": "Changes",
+          "icon": "save",
+          "action": "form-submit",
+          "expectedBehavior": "validate inputs and submit/apply changes"
+        },
+        {
+          "kind": "input",
+          "label": "Enter item name",
+          "type": "text",
+          "placeholder": "Enter item name",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "Enter unique SKU",
+          "type": "text",
+          "placeholder": "Enter unique SKU",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "itemCategory",
+          "type": "select",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "Detailed technical specifications and usage guidelines...",
+          "type": "textarea",
+          "placeholder": "Detailed technical specifications and usage guidelines...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "rentalPrice",
+          "type": "number",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "status",
+          "type": "radio",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [],
+      "title": "Item Editor - TrailHaus"
+    },
+    "6ce838b6d4c84ecb982e1a9657489e3a": {
+      "screenId": "6ce838b6d4c84ecb982e1a9657489e3a",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "header",
+          "layout": "flex-row",
+          "classes": [
+            "flex",
+            "justify-between",
+            "items-center",
+            "h-16",
+            "px-8",
+            "sticky",
+            "top-0",
+            "z-50",
+            "ml-64",
+            "bg-surface/80"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "nav",
+          "layout": "flex-col",
+          "classes": [
+            "flex",
+            "flex-col",
+            "h-screen",
+            "fixed",
+            "left-0",
+            "top-0",
+            "py-6",
+            "px-4",
+            "docked",
+            "left-0"
+          ],
+          "childCount": 12
+        },
+        {
+          "tag": "main",
+          "layout": "block",
+          "classes": [
+            "ml-64",
+            "p-margin-desktop",
+            "min-h-[calc(100vh-64px)]",
+            "bg-surface-container-lowest"
+          ],
+          "childCount": 41
+        },
+        {
+          "tag": "footer",
+          "layout": "flex-row",
+          "classes": [
+            "flex",
+            "justify-between",
+            "items-center",
+            "py-3",
+            "px-8",
+            "ml-64",
+            "bg-surface-container-low",
+            "dark:bg-surface-container-lowest",
+            "border-t",
+            "border-outline-variant"
+          ],
+          "childCount": 4
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Add Gear",
+          "classes": [
+            "bg-secondary",
+            "text-on-secondary",
+            "px-4",
+            "py-2",
+            "rounded-DEFAULT",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-secondary/90",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-primary",
+            "transition-colors",
+            "relative"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "classes": [
+            "w-full",
+            "mb-6",
+            "py-2",
+            "px-4",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "font-label-md",
+            "text-label-md",
+            "text-primary",
+            "hover:bg-surface-container-lowest",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-2"
+          ],
+          "icon": "bolt",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "All Items",
+          "classes": [
+            "px-4",
+            "py-1.5",
+            "bg-primary-container",
+            "text-on-primary-container",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "whitespace-nowrap"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Tents",
+          "classes": [
+            "px-4",
+            "py-1.5",
+            "text-on-surface-variant",
+            "hover:bg-surface-container-high",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "whitespace-nowrap",
+            "transition-colors",
+            "border",
+            "border-transparent",
+            "hover:border-outline-variant"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Packs",
+          "classes": [
+            "px-4",
+            "py-1.5",
+            "text-on-surface-variant",
+            "hover:bg-surface-container-high",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "whitespace-nowrap",
+            "transition-colors",
+            "border",
+            "border-transparent",
+            "hover:border-outline-variant"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Apparel",
+          "classes": [
+            "px-4",
+            "py-1.5",
+            "text-on-surface-variant",
+            "hover:bg-surface-container-high",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "whitespace-nowrap",
+            "transition-colors",
+            "border",
+            "border-transparent",
+            "hover:border-outline-variant"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Filter Settings",
+          "classes": [
+            "p-1.5",
+            "text-on-surface-variant",
+            "hover:text-primary",
+            "transition-colors"
+          ],
+          "icon": "tune",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/settings",
+          "expectedRoute": "/settings",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Edit",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-primary",
+            "font-label-md",
+            "text-label-md",
+            "transition-colors",
+            "opacity-0",
+            "group-hover:opacity-100"
+          ],
+          "icon": null,
+          "action": "edit",
+          "expectedBehavior": "open edit flow or update selected item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Prev",
+          "classes": [
+            "px-3",
+            "py-1",
+            "border",
+            "border-outline-variant",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "text-on-surface-variant",
+            "hover:bg-surface",
+            "transition-colors",
+            "disabled:opacity-50"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Next",
+          "classes": [
+            "px-3",
+            "py-1",
+            "border",
+            "border-outline-variant",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "text-on-surface-variant",
+            "hover:bg-surface",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "edit",
+          "classes": [
+            "flex-1",
+            "bg-surface-container-high",
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "px-4",
+            "py-2",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "flex",
+            "justify-center",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "edit",
+          "action": "edit",
+          "expectedBehavior": "open edit flow or update selected item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Refresh",
+          "classes": [
+            "flex-1",
+            "bg-surface-container-highest",
+            "border",
+            "border-outline",
+            "text-on-surface",
+            "px-4",
+            "py-2",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-outline",
+            "hover:text-on-primary",
+            "transition-colors",
+            "flex",
+            "justify-center",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "sync",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Retry Load",
+          "classes": [
+            "px-4",
+            "py-2",
+            "border",
+            "border-error",
+            "text-error",
+            "rounded-sm",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-error",
+            "hover:text-on-error",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "retry",
+          "expectedBehavior": "retry the failed action and show loading/error feedback"
+        },
+        {
+          "kind": "button",
+          "label": "landscape",
+          "classes": [],
+          "icon": "landscape",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus OS v2.4.0",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search inventory...",
+          "placeholder": "Search inventory...",
+          "name": "",
+          "classes": [
+            "w-full",
+            "pl-10",
+            "pr-4",
+            "py-2",
+            "bg-surface-container-low",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "transition-all"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "checkbox",
+          "label": "checkbox",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "rounded-sm",
+            "border-outline-variant",
+            "text-primary",
+            "focus:ring-primary",
+            "w-4",
+            "h-4"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "inventory_2",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "calendar_today",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "groups",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "analytics",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "settings_suggest",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "System Status: Operational",
+          "href": "#",
+          "classes": [
+            "hover:text-primary",
+            "underline",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Help Center",
+          "href": "#",
+          "classes": [
+            "hover:text-primary",
+            "underline",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Privacy Policy",
+          "href": "#",
+          "classes": [
+            "hover:text-primary",
+            "underline",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "search",
+        "notifications",
+        "landscape",
+        "bolt",
+        "calendar_today",
+        "groups",
+        "analytics",
+        "settings_suggest",
+        "help",
+        "settings",
+        "inventory",
+        "local_shipping",
+        "build",
+        "tune",
+        "edit",
+        "sync",
+        "error"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCas1Avq7JPaj1DmPRtI1io2wB9nItPkQ0HuBJSqeyFhddp31QmZcXZ18uz05Rp_z3Ob4dDFXTs-4BUqcYtJDX09eTpH1nGh0LGe7GPJnIrA9oSkzQOVUrrFrP8OxIXPPVTKMmHaUWZsDfCHEUiCl",
+          "alt": "Administrator"
+        },
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDb9xSLpST0T22oW9KvHzI5wxqrMOc9g6ImMJzv6mrbPB0MjEjIXr3qKplajvQLe7Wf6G8BKTtbEquc3Nx4hUw04N5imN50fzi7ubHAiy3gUD2xk55sXWva-RUBuYI02VkVCoTivvReDPTONCvkPd",
+          "alt": "Alpine Ridge 3P Tent"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-tertiary-fixed": "#261911",
+        "on-error-container": "#93000a",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#c3c8c1",
+        "on-tertiary-fixed-variant": "#54433a",
+        "primary-fixed-dim": "#b4cdb8",
+        "on-error": "#ffffff",
+        "secondary-fixed-dim": "#ffb599",
+        "surface-variant": "#e1e2e6",
+        "primary-container": "#1b3022",
+        "outline": "#737973",
+        "on-background": "#191c1f",
+        "on-surface": "#191c1f",
+        "on-primary": "#ffffff",
+        "on-secondary-fixed": "#370e00",
+        "tertiary": "#21140c",
+        "surface-bright": "#f8f9fd",
+        "inverse-on-surface": "#eff1f4",
+        "on-primary-container": "#819986",
+        "tertiary-fixed-dim": "#dac2b5",
+        "surface-container-high": "#e6e8ec",
+        "error": "#ba1a1a",
+        "on-tertiary": "#ffffff",
+        "inverse-primary": "#b4cdb8",
+        "surface-tint": "#4d6453",
+        "surface-dim": "#d8dade",
+        "secondary-fixed": "#ffdbce",
+        "on-secondary": "#ffffff",
+        "tertiary-fixed": "#f7ddd0",
+        "on-secondary-fixed-variant": "#7f2b00",
+        "secondary": "#a63b00",
+        "surface-container-highest": "#e1e2e6",
+        "primary-fixed": "#d0e9d4",
+        "background": "#f8f9fd",
+        "surface-container-low": "#f2f4f7",
+        "on-surface-variant": "#434843",
+        "on-tertiary-container": "#a48e83",
+        "on-primary-fixed-variant": "#364c3c",
+        "secondary-container": "#fe5f00",
+        "on-primary-fixed": "#0b2013",
+        "error-container": "#ffdad6",
+        "tertiary-container": "#372820",
+        "inverse-surface": "#2e3134",
+        "primary": "#061b0e",
+        "surface-container": "#eceef1",
+        "on-secondary-container": "#521900",
+        "surface": "#f8f9fd"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Archivo Narrow",
+        "Inter"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col",
+        "gap": "6"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "icon": "inventory_2",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "icon": "calendar_today",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "icon": "groups",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "icon": "settings_suggest",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "icon": "help",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "System Status: Operational",
+          "icon": null,
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Help Center",
+          "icon": null,
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Privacy Policy",
+          "icon": null,
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Add Gear",
+          "icon": null,
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "icon": "bolt",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "All Items",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Tents",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Packs",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Apparel",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Filter Settings",
+          "icon": "tune",
+          "action": "navigate",
+          "route": "/settings",
+          "expectedBehavior": "navigate:/settings"
+        },
+        {
+          "kind": "button",
+          "label": "Edit",
+          "icon": null,
+          "action": "edit",
+          "expectedBehavior": "open edit flow or update selected item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Prev",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Next",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "edit",
+          "icon": "edit",
+          "action": "edit",
+          "expectedBehavior": "open edit flow or update selected item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Refresh",
+          "icon": "sync",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Retry Load",
+          "icon": null,
+          "action": "retry",
+          "expectedBehavior": "retry the failed action and show loading/error feedback"
+        },
+        {
+          "kind": "button",
+          "label": "landscape",
+          "icon": "landscape",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus OS v2.4.0",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search inventory...",
+          "type": "text",
+          "placeholder": "Search inventory...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "checkbox",
+          "type": "checkbox",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "landscape",
+          "icon": "landscape",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus Admin Hub",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Quick Rental",
+          "icon": "bolt",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Inventory",
+          "icon": "inventory_2",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Bookings",
+          "icon": "calendar_today",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Customers",
+          "icon": "groups",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Maintenance",
+          "icon": "settings_suggest",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Support",
+          "icon": "help",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "TrailHaus OS v2.4.0",
+          "icon": null,
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "System Status: Operational",
+          "icon": null,
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Help Center",
+          "icon": null,
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Privacy Policy",
+          "icon": null,
+          "route": "#",
+          "active": true
+        }
+      ],
+      "title": "Item Operations - TrailHaus"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "screenId": "2ec34fad2a03488d83583de6f30600c3",
+    "name": "Settings and Preferences - TrailHaus",
+    "type": "settings",
+    "description": "Settings and Preferences - TrailHaus screen",
+    "surfaceIds": [
+      "SURF_SETTINGS_AND_PREFERENCES"
+    ]
+  },
+  {
+    "screenId": "5c341a4f87b34531b346ff0c5abd3c7c",
+    "name": "Insights - TrailHaus",
+    "type": "app-screen",
+    "description": "Insights - TrailHaus screen",
+    "surfaceIds": [
+      "SURF_INSIGHTS"
+    ]
+  },
+  {
+    "screenId": "6ce838b6d4c84ecb982e1a9657489e3a",
+    "name": "Item Operations - TrailHaus",
+    "type": "app-screen",
+    "description": "Item Operations - TrailHaus screen",
+    "surfaceIds": [
+      "SURF_ITEM_OPERATIONS"
+    ]
+  },
+  {
+    "screenId": "6c611827e5be4164abd4b1df3e19cfc3",
+    "name": "Item Editor - TrailHaus",
+    "type": "form",
+    "description": "Item Editor - TrailHaus screen",
+    "surfaceIds": [
+      "SURF_ITEM_EDITOR"
+    ]
+  }
+]

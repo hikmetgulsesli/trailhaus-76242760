@@ -1,0 +1,46 @@
+[
+  {
+    "screenId": "2ec34fad2a03488d83583de6f30600c3",
+    "title": "Settings and Preferences - TrailHaus",
+    "htmlFile": "2ec34fad2a03488d83583de6f30600c3.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sX2Y0MDNjMjRiOWM2OTRlNjE5ZGViMjhmY2Y1ZDk1ZjhiEgsSBxCN19Wi9xcYAZIBIgoKcHJvamVjdF9pZBIUQhIyMzgyNjk3MTI4NTIyMzY2NjQ&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/trailhaus-76242760/stitch/2ec34fad2a03488d83583de6f30600c3.html",
+    "surfaceIds": [
+      "SURF_SETTINGS_AND_PREFERENCES"
+    ]
+  },
+  {
+    "screenId": "5c341a4f87b34531b346ff0c5abd3c7c",
+    "title": "Insights - TrailHaus",
+    "htmlFile": "5c341a4f87b34531b346ff0c5abd3c7c.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzg3NzVhZGQ1NzIwYTRjMTc4NGFmZDM1MWI3ZDBlYjQ3EgsSBxCN19Wi9xcYAZIBIgoKcHJvamVjdF9pZBIUQhIyMzgyNjk3MTI4NTIyMzY2NjQ&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/trailhaus-76242760/stitch/5c341a4f87b34531b346ff0c5abd3c7c.html",
+    "surfaceIds": [
+      "SURF_INSIGHTS"
+    ]
+  },
+  {
+    "screenId": "6ce838b6d4c84ecb982e1a9657489e3a",
+    "title": "Item Operations - TrailHaus",
+    "htmlFile": "6ce838b6d4c84ecb982e1a9657489e3a.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sX2EzNDMwYzRmZThkZjQ5ZGM4YjU5ZTEwZTZhYWE1OGRjEgsSBxCN19Wi9xcYAZIBIgoKcHJvamVjdF9pZBIUQhIyMzgyNjk3MTI4NTIyMzY2NjQ&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/trailhaus-76242760/stitch/6ce838b6d4c84ecb982e1a9657489e3a.html",
+    "surfaceIds": [
+      "SURF_ITEM_OPERATIONS"
+    ]
+  },
+  {
+    "screenId": "6c611827e5be4164abd4b1df3e19cfc3",
+    "title": "Item Editor - TrailHaus",
+    "htmlFile": "6c611827e5be4164abd4b1df3e19cfc3.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzgzNjJmNDUwMzY4ZTQ2ZjY5ZDk0MWY5MDJlZjY4NTMzEgsSBxCN19Wi9xcYAZIBIgoKcHJvamVjdF9pZBIUQhIyMzgyNjk3MTI4NTIyMzY2NjQ&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/trailhaus-76242760/stitch/6c611827e5be4164abd4b1df3e19cfc3.html",
+    "surfaceIds": [
+      "SURF_ITEM_EDITOR"
+    ]
+  }
+]
